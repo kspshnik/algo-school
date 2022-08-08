@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ReturnButton } from '../../ui/return-button/return-button';
+import { ReturnButton } from '../../ui';
 import styles from './solution-layout.module.css';
 import { SolutionLayoutProps } from '../../types/prop.types';
 

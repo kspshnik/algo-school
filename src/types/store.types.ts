@@ -1,6 +1,18 @@
-export type RootState = ReturnType<typeof rootReducer>;
-export type AppDispatch = typeof store.dispatch;
+export type TAlgoViewItem = {
+  isChanging: boolean,
+  isDone: boolean,
+  value: string | number,
+};
+export type TAlgoView = Array<TAlgoViewItem>;
 
-export type AppThunk<TReturn = void> = ActionCreator<
-ThunkAction<TReturn, RootState, unknown, Action>
->;
+export type TAlgoSliceState = {
+  viewData: TAlgoView,
+  isDone: boolean,
+  isActive: boolean,
+};
+
+export type TFormsSliceState = {
+  string: string,
+  fibonacchiLimit: number,
+  randomArray: Array<number>,
+};
