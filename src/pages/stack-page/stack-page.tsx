@@ -1,6 +1,8 @@
 import React from 'react';
-import { SolutionLayout } from '../../layouts/solution-layout/solution-layout';
+import { SolutionLayout } from '../../layouts';
 
-export const StackPage: React.FC = () => (
+const StackPage: React.FC = () => (
   <SolutionLayout title='Стек' />
 );
+
+export default StackPage;

@@ -1,6 +1,8 @@
 import React from 'react';
-import { SolutionLayout } from '../../layouts/solution-layout/solution-layout';
+import { SolutionLayout } from '../../layouts';
 
-export const QueuePage: React.FC = () => (
+const QueuePage: React.FC = () => (
   <SolutionLayout title='Очередь' />
 );
+
+export default QueuePage;

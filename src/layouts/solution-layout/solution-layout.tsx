@@ -2,13 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ReturnButton } from '../../ui/return-button/return-button';
 import styles from './solution-layout.module.css';
+import { SolutionLayoutProps } from '../../types/prop.types';
 
-interface SolutionLayoutProps {
-  title: string;
-  extraClass?: string;
-}
-
-export const SolutionLayout: React.FC<SolutionLayoutProps> = ({
+const SolutionLayout: React.FC<SolutionLayoutProps> = ({
   extraClass = '',
   title,
   children,
@@ -38,3 +34,5 @@ export const SolutionLayout: React.FC<SolutionLayoutProps> = ({
     </p>
   </main>
 );
+
+export default SolutionLayout;

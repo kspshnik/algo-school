@@ -1,6 +1,8 @@
 import React from 'react';
-import { SolutionLayout } from '../../layouts/solution-layout/solution-layout';
+import { SolutionLayout } from '../../layouts';
 
-export const ListPage: React.FC = () => (
+const ListPage: React.FC = () => (
   <SolutionLayout title='Связный список' />
 );
+
+export default ListPage;
