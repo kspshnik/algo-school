@@ -1,4 +1,9 @@
-import { Action, ActionCreator, combineReducers } from 'redux';
+import {
+  Action,
+  ActionCreator,
+  combineReducers,
+  StoreEnhancer,
+} from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
 import Sentry from '../sentry';
@@ -11,7 +16,7 @@ export const rootReducer = combineReducers({
 
 });
 
-const sentryReduxEnhancer = Sentry.createReduxEnhancer({});
+const sentryReduxEnhancer = Sentry.createReduxEnhancer({}) as StoreEnhancer;
 
 const store = configureStore({
   reducer: rootReducer,
