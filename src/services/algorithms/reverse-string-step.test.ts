@@ -1,0 +1,28 @@
+import { reverseStringStep } from './index';
+
+describe('testing border cases', () => {
+  const emptyString = '';
+  it('should return empty string on empty string', () => {
+    expect(reverseStringStep(emptyString, 0, 0)).toEqual('');
+  });
+  it('should throw if tail is greater then length', () => {
+    expect(() => reverseStringStep(emptyString, 0, 6)).toThrow(
+      'reverseStringStep(): Head and/or tail is/are out of range!',
+    );
+  });
+});
+describe('testing reverse string step', () => {
+  it('should return reversed on even length string', () => {
+    expect(reverseStringStep('ab', 0, 1)).toEqual('ba');
+    expect(reverseStringStep('poke', 1, 2)).toEqual('pkoe');
+    expect(reverseStringStep('alfabeta', 2, 5)).toEqual('aleabfta');
+  });
+  it('should return a string itself if head === tail', () => {
+    expect(reverseStringStep('react', 2, 2)).toEqual('react');
+  });
+  it('should return reversed on odd length string', () => {
+    expect(reverseStringStep('ava', 0, 2)).toEqual('ava');
+    expect(reverseStringStep('poker', 1, 3)).toEqual('pekor');
+    expect(reverseStringStep('react', 1, 3)).toEqual('rcaet');
+  });
+});
