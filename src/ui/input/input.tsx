@@ -1,13 +1,8 @@
 import React from 'react';
 import styles from './input.module.css';
+import { InputProps } from '../../types/prop.types';
 
-interface InputProps extends React.HTMLProps<HTMLInputElement> {
-  placeholder?: string;
-  extraClass?: string;
-  isLimitText?: boolean;
-}
-
-export const Input: React.FC<InputProps> = ({
+const Input: React.FC<InputProps> = ({
   placeholder = 'Введите текст',
   extraClass = '',
   type = 'text',
@@ -38,3 +33,5 @@ export const Input: React.FC<InputProps> = ({
     </div>
   );
 };
+
+export default Input;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const ReturnIcon = () => (
+const ReturnIcon = () => (
   <svg
     width='24'
     height='24'
@@ -14,3 +14,5 @@ export const ReturnIcon = () => (
       fill='#0032FF' />
   </svg>
 );
+
+export default ReturnIcon;

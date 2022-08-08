@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const AscendingIcon = () => (
+const AscendingIcon = () => (
   <svg
     width='20'
     height='12'
@@ -13,3 +13,5 @@ export const AscendingIcon = () => (
       fillOpacity='0.85' />
   </svg>
 );
+
+export default AscendingIcon;

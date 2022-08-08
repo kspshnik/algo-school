@@ -1,14 +1,9 @@
 import React from 'react';
 import styles from './column.module.css';
 import { ElementStates } from '../../types/element-states';
+import { ColumnProps } from '../../types/prop.types';
 
-interface ColumnProps {
-  index: number;
-  state?: ElementStates;
-  extraClass?: string;
-}
-
-export const Column: React.FC<ColumnProps> = ({
+const Column: React.FC<ColumnProps> = ({
   index,
   state = ElementStates.Default,
   extraClass = '',
@@ -20,3 +15,5 @@ export const Column: React.FC<ColumnProps> = ({
     <p className='text text_type_column text_color_input mt-3'>{index}</p>
   </div>
 );
+
+export default Column;

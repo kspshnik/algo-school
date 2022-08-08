@@ -1,19 +1,9 @@
 import React from 'react';
 import styles from './circle.module.css';
 import { ElementStates } from '../../types/element-states';
+import { CircleProps } from '../../types/prop.types';
 
-interface CircleProps {
-  state?: ElementStates;
-  letter?: string;
-  head?: string | React.ReactElement | null;
-  index?: number;
-  tail?: string | React.ReactElement | null;
-  tailType?: 'string' | 'element';
-  extraClass?: string;
-  isSmall?: boolean;
-}
-
-export const Circle: React.FC<CircleProps> = ({
+const Circle: React.FC<CircleProps> = ({
   state = ElementStates.Default,
   letter,
   head,
@@ -54,3 +44,5 @@ export const Circle: React.FC<CircleProps> = ({
     </div>
   </div>
 );
+
+export default Circle;

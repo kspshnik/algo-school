@@ -1,10 +1,7 @@
 import React from 'react';
+import { ArrowIconProps } from '../../types/prop.types';
 
-interface Props {
-  fill?: string;
-}
-
-export const ArrowIcon: React.FC<Props> = ({ fill = '#0032FF' }) => (
+const ArrowIcon: React.FC<ArrowIconProps> = ({ fill = '#0032FF' }) => (
   <svg
     width='24'
     height='24'
@@ -18,3 +15,5 @@ export const ArrowIcon: React.FC<Props> = ({ fill = '#0032FF' }) => (
       fill={fill} />
   </svg>
 );
+
+export default ArrowIcon;
