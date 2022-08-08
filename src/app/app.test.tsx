@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from './app';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App should not change main page during development', () => {
+  const app = render(<App />);
+  it('should match snapshot', () => {
+    expect(app).toMatchSnapshot();
+  });
 });
