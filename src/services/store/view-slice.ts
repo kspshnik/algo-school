@@ -1,8 +1,20 @@
 import { combineReducers } from 'redux';
 
-import stringReverseReducer, { startStringReverse, stopStringReverse, nextStringReverseStep } from './string-slice';
-import fibonacchiReducer, { startFibonachhi, stopFibonacchi, nextFibonacchiNumber } from './fibonacchi-slice';
-import sortingReducer, { startSorting, stopSorting, nextSortingStep } from './sorting-slice';
+import stringReverseReducer, {
+  nextStringReverseStep,
+  resetString,
+  startStringReverse,
+  stopStringReverse,
+} from './string-slice';
+import fibonacchiReducer, {
+  nextFibonacchiNumber,
+  resetFibonacchi,
+  startFibonachhi,
+  stopFibonacchi,
+} from './fibonacchi-slice';
+import sortingReducer, {
+  nextSortingStep, resetSorting, startSorting, stopSorting,
+} from './sorting-slice';
 
 const viewReducer = combineReducers({
   string: stringReverseReducer,
@@ -14,12 +26,15 @@ export {
   startSorting,
   stopSorting,
   nextSortingStep,
+  resetSorting,
   startFibonachhi,
   stopFibonacchi,
   nextFibonacchiNumber,
+  resetFibonacchi,
   startStringReverse,
   stopStringReverse,
   nextStringReverseStep,
+  resetString,
 };
 
 export default viewReducer;

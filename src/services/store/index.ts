@@ -1,24 +1,28 @@
 import store, {
-  rootReducer, RootState, AppDispatch, AppThunk,
+  AppDispatch, AppThunk, rootReducer, RootState,
 } from './store';
 import {
-  startStringReverse,
-  stopStringReverse,
-  nextStringReverseStep,
-  startFibonachhi,
-  stopFibonacchi,
   nextFibonacchiNumber,
-  startSorting,
-  stopSorting,
   nextSortingStep,
+  nextStringReverseStep,
+  resetFibonacchi,
+  resetSorting,
+  resetString,
+  startFibonachhi,
+  startSorting,
+  startStringReverse,
+  stopFibonacchi,
+  stopSorting,
+  stopStringReverse,
 } from './view-slice';
 import {
-  setString,
+  clearFibonacchiLimit,
+  clearRandomArray,
   clearString,
   setFibonacchiLimit,
-  clearFibonacchiLimit,
   setRandomArray,
-  clearRandomArray,
+  setSortingType,
+  setString,
 } from './forms-slice';
 
 export {
@@ -27,18 +31,22 @@ export {
   startStringReverse,
   stopStringReverse,
   nextStringReverseStep,
+  resetString,
   startFibonachhi,
   stopFibonacchi,
   nextFibonacchiNumber,
+  resetFibonacchi,
   startSorting,
   stopSorting,
   nextSortingStep,
+  resetSorting,
   setString,
   clearString,
   setFibonacchiLimit,
   clearFibonacchiLimit,
   setRandomArray,
   clearRandomArray,
+  setSortingType,
 };
 
 export type {
