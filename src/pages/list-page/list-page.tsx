@@ -1,8 +1,8 @@
 import React from 'react';
-import { SolutionLayout } from '../../layouts';
+import { PageLayout } from '../../layouts';
 
-const ListPage: React.FC = () => (
-  <SolutionLayout title='Связный список' />
+const ListPage : React.FC = () => (
+  <PageLayout title='Связный список' />
 );
 
 export default ListPage;

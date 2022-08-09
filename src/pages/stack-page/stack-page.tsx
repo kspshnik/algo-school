@@ -1,8 +1,8 @@
 import React from 'react';
-import { SolutionLayout } from '../../layouts';
+import { PageLayout } from '../../layouts';
 
-const StackPage: React.FC = () => (
-  <SolutionLayout title='Стек' />
+const StackPage : React.FC = () => (
+  <PageLayout title='Стек' />
 );
 
 export default StackPage;

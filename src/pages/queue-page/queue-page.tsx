@@ -1,8 +1,8 @@
 import React from 'react';
-import { SolutionLayout } from '../../layouts';
+import { PageLayout } from '../../layouts';
 
-const QueuePage: React.FC = () => (
-  <SolutionLayout title='Очередь' />
+const QueuePage : React.FC = () => (
+  <PageLayout title='Очередь' />
 );
 
 export default QueuePage;

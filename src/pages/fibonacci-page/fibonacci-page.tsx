@@ -1,8 +1,8 @@
 import React from 'react';
-import { SolutionLayout } from '../../layouts';
+import { PageLayout } from '../../layouts';
 
-const FibonacciPage: React.FC = () => (
-  <SolutionLayout title='Последовательность Фибоначчи' />
+const FibonacciPage : React.FC = () => (
+  <PageLayout title='Последовательность Фибоначчи' />
 );
 
 export default FibonacciPage;
