@@ -1,6 +1,6 @@
 import { reverseStringStep } from './index';
 
-function* reverseStringGenerator(str: string) : Generator<string, string | void, never> {
+function* reverseStringGenerator(str: string) : Generator<string, void, never> {
   if (str.length > 2) {
     let head = 0;
     let tail = str.length - 1;
