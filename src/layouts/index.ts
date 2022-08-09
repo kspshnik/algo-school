@@ -1,4 +1,8 @@
+import PageLayout from './page-layout/page-layout';
+import TaskLayout from './task-layout/task-layout';
+import ControlsLayout from './controls-layout/controls-layout';
 import SolutionLayout from './solution-layout/solution-layout';
 
-// eslint-disable-next-line import/prefer-default-export
-export { SolutionLayout };
+export {
+  PageLayout, TaskLayout, ControlsLayout, SolutionLayout,
+};
