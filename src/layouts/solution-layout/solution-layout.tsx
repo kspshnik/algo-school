@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './solution-layout.module.css';
 import { LayoutProps } from '../../types/prop.types';
+import styles from './solution-layout.module.css';
 
-const SolutionLayout : React.FC<LayoutProps> = ({ children, extraClass }) => (
-  <div className={`${styles.solution} ${(!extraClass ? '' : extraClass)}`}>
+const SolutionLayout : React.FC<LayoutProps> = ({ children }) => (
+  <div className={styles.solution}>
     {children}
   </div>
 );

@@ -59,5 +59,4 @@ export interface RadioInputProps extends React.HTMLProps<HTMLInputElement> {
 
 export interface LayoutProps {
   children : React.ReactNode | Array<React.ReactNode>,
-  extraClass? : string,
 }
