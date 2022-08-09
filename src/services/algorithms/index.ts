@@ -1,4 +1,4 @@
-import reverseStringStep from './reverse-string-step';
+import reverseStringGenerator from './reverse-string-generator';
+import fibonacchiGenerator from './fibonacchi-generator';
 
-// eslint-disable-next-line import/prefer-default-export
-export { reverseStringStep };
+export { reverseStringGenerator, fibonacchiGenerator };

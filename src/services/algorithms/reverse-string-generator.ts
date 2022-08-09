@@ -1,4 +1,4 @@
-import { reverseStringStep } from './index';
+import reverseStringStep from './reverse-string-step';
 
 function* reverseStringGenerator(str: string) : Generator<string, void, never> {
   if (str.length > 2) {
