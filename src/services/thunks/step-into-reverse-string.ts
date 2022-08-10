@@ -1,6 +1,7 @@
 import { AppThunk, nextStringReverseStep, stopStringReverse } from '../store';
 import { AlgorithmsIterator } from '../../types/types';
 import { TAlgoView } from '../../types/store.types';
+import { makeViewFromString } from '../helpers';
 
 const stepIntoReverseString : AppThunk = (
   algorithm : AlgorithmsIterator,
@@ -13,6 +14,7 @@ const stepIntoReverseString : AppThunk = (
     value: next[index],
     isChanging: next[index] !== prev[index],
     isDone: view[index].isDone && next[index] === prev[index],
+    id: view[index].id,
   }));
 
   const { isActive, isFinished, viewData } = getState().view.string;
@@ -25,10 +27,12 @@ const stepIntoReverseString : AppThunk = (
           isChanging,
           isDone,
           value,
+          id,
         }) => ({
           value,
           isDone: isChanging || isDone,
           isChanging: false,
+          id,
         }),
       )));
     } else {

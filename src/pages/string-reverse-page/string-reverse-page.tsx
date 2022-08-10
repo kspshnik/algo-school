@@ -4,10 +4,11 @@ import { Button, Input } from '../../ui';
 
 import styles from './string-reverse-page.module.css';
 import { useDispatch, useSelector } from '../../services/hooks/store.hooks';
-import { resetString, setString } from '../../services/store';
+import { resetString } from '../../services/store';
 import { reverseStringGenerator } from '../../services/algorithms';
 import { AlgorithmsIterator } from '../../types/types';
-import { stepIntoReverseString } from '../../services/thunks';
+import { invokeReverseString, setStringThunk, stepIntoReverseString } from '../../services/thunks';
+import { MAX_STRING_LENGTH } from '../../constants';
 import { Circle } from '../../widgets';
 import { getElementState } from '../../services/helpers';
 
@@ -19,14 +20,14 @@ const StringReversePage : React.FC = () => {
   // = React.useRef<ReturnType<typeof reverseStringGenerator>>(null);
 
   const handleChange : React.ChangeEventHandler<HTMLInputElement> = (evt) => {
-    dispatch(setString(evt.target.value));
+    dispatch(setStringThunk(evt.target.value));
   };
   const handleStartAlgorithm : React.MouseEventHandler<HTMLButtonElement> = () => {
     // TODO: разобраться с типизацией!
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    // eslint-disable-next-line max-len
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
     algorithmIterator.current = reverseStringGenerator(string) as AlgorithmsIterator;
-    console.log('Клик!');
+    dispatch(invokeReverseString(algorithmIterator.current));
   };
 
   const handleNextStep : React.AnimationEventHandler = () => {
@@ -48,7 +49,7 @@ const StringReversePage : React.FC = () => {
       <ControlsLayout>
         <div className={styles.controls}>
           <Input
-            maxLength={11}
+            maxLength={MAX_STRING_LENGTH}
             isLimitText
             placeholder='Введите текст'
             extraClass='mr-6'
@@ -56,19 +57,23 @@ const StringReversePage : React.FC = () => {
             onChange={handleChange} />
           <Button
             text='Развернуть'
-            disabled={!(string.length > 0 && string.length < 12) || isActive}
+            disabled={!(string.length > 0 && string.length <= MAX_STRING_LENGTH) || isActive}
             onClick={handleStartAlgorithm} />
         </div>
       </ControlsLayout>
       <SolutionLayout>
         <div className={styles.dashboard}>
-          {viewData.map(({ value, isDone, isChanging }, index) => (
-            <Circle
-              key={`${index}-${value}`}
-              index={index}
-              letter={`${value}`}
-              state={getElementState(isChanging, isDone)}
-              onAnimationEnd={handleNextStep} />
+          {viewData.map(({
+            value, isDone, isChanging, id,
+          }) => (
+            /* <Circle
+            key={`${index}-${value}`}
+            index={index}
+            letter={`${value}`}
+            state={getElementState(isChanging, isDone)}
+            onAnimationEnd={handleNextStep} /> */
+            // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+            <p key={id}>{`value = '${value}' isDone: ${isDone} isChanging: ${isChanging}`}</p>
           ))}
         </div>
       </SolutionLayout>

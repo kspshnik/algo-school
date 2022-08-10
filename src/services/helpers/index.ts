@@ -1,6 +1,7 @@
 import getElementState from './get-element-state';
+import makeViewFromString from './make-view-from-string';
 
 export {
-  // eslint-disable-next-line import/prefer-default-export
   getElementState,
+  makeViewFromString,
 };

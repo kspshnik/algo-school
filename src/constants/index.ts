@@ -4,6 +4,7 @@ import { algoInitialState } from './store-initial-states';
 import {
   BUBBLE_SORT, FIBONACCHI, INSERTION_SORT, STRING_REVERSE,
 } from './type-literals';
+import { MAX_STRING_LENGTH } from './input-limits';
 
 export {
   DELAY_IN_MS,
@@ -15,4 +16,5 @@ export {
   INSERTION_SORT,
   FIBONACCHI,
   STRING_REVERSE,
+  MAX_STRING_LENGTH,
 };

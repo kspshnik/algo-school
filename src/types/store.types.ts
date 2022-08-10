@@ -1,6 +1,7 @@
 import { TSortingType } from './types';
 
 export type TAlgoViewItem = {
+  id: string,
   isChanging : boolean,
   isDone : boolean,
   value : string | number,
