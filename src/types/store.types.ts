@@ -9,7 +9,7 @@ export type TAlgoView = Array<TAlgoViewItem>;
 
 export type TAlgoSliceState = {
   viewData : TAlgoView,
-  isDone : boolean,
+  isFinished : boolean,
   isActive : boolean,
 };
 

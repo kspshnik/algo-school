@@ -20,7 +20,7 @@ export interface CircleProps {
   tailType? : 'string' | 'element',
   extraClass? : string,
   isSmall? : boolean,
-  onAnimationEnd : React.AnimationEventHandler,
+  onAnimationEnd : React.AnimationEventHandler<HTMLDivElement>,
 }
 
 export interface ColumnProps {
