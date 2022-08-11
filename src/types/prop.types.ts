@@ -11,7 +11,7 @@ export interface MainPageProps {
   extraClass? : string;
 }
 
-interface CircleProps {
+export interface CircleProps {
   state? : ElementStates;
   letter? : string;
   head? : string | React.ReactElement | null;

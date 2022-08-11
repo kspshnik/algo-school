@@ -3,7 +3,7 @@ import styles from './circle.module.css';
 import { ElementStates } from '../../types/element-states';
 import { CircleProps } from '../../types/prop.types';
 
-export const Circle : React.FC<CircleProps> = ({
+const Circle : React.FC<CircleProps> = ({
   state = ElementStates.Default,
   letter,
   head,
@@ -44,3 +44,5 @@ export const Circle : React.FC<CircleProps> = ({
     </div>
   </div>
 );
+
+export default Circle;
