@@ -15,10 +15,10 @@ const fibonacchiSlice = createSlice({
     stopFibonacchi: (state) => (
       { ...state, isDone: true, isActive: false }
     ),
-    nextFibonacchiNumber: (state, action : PayloadAction<TAlgoView>) => (
+    nextFibonacchiStep: (state, action : PayloadAction<TAlgoView>) => (
       { ...state, viewData: action.payload }
     ),
-    resetFibonacchi: (state) => (
+    resetFibonacchi: () => (
       { ...initialState }
     ),
   },
@@ -29,7 +29,7 @@ const fibonacchiReducer = fibonacchiSlice.reducer;
 export const {
   startFibonachhi,
   stopFibonacchi,
-  nextFibonacchiNumber,
+  nextFibonacchiStep,
   resetFibonacchi,
 } = fibonacchiSlice.actions;
 

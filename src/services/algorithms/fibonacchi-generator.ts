@@ -1,13 +1,15 @@
-function* fibonacchiGenerator(limit: number) : Generator<number, void, never> {
+function* fibonacchiGenerator(limit : number) : Generator<Array<number>, void, Array<number>> {
   const fib : Array<number> = [];
+  let res : Array<number>;
   for (let i = 0; i < limit + 1; i += 1) {
     if (i === 0 || i === 1) {
-      yield i;
       fib.push(i);
+      yield fib;
     } else {
-      yield fib[i - 1] + fib[i - 2];
       fib.push(fib[i - 1] + fib[i - 2]);
+      yield fib;
     }
   }
 }
+
 export default fibonacchiGenerator;

@@ -4,7 +4,7 @@ import { algoInitialState } from './store-initial-states';
 import {
   BUBBLE_SORT, FIBONACCHI, INSERTION_SORT, STRING_REVERSE,
 } from './type-literals';
-import { MAX_STRING_LENGTH } from './input-limits';
+import { MAX_NUMBER_FIBONACCHI, MAX_STRING_LENGTH } from './input-limits';
 
 export {
   DELAY_IN_MS,
@@ -17,4 +17,5 @@ export {
   FIBONACCHI,
   STRING_REVERSE,
   MAX_STRING_LENGTH,
+  MAX_NUMBER_FIBONACCHI,
 };

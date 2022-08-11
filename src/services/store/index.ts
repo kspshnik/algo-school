@@ -2,7 +2,7 @@ import store, {
   AppDispatch, AppThunk, rootReducer, RootState,
 } from './store';
 import {
-  nextFibonacchiNumber,
+  nextFibonacchiStep,
   nextSortingStep,
   nextStringReverseStep,
   resetFibonacchi,
@@ -34,7 +34,7 @@ export {
   resetString,
   startFibonachhi,
   stopFibonacchi,
-  nextFibonacchiNumber,
+  nextFibonacchiStep,
   resetFibonacchi,
   startSorting,
   stopSorting,
