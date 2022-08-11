@@ -11,16 +11,15 @@ export interface MainPageProps {
   extraClass? : string;
 }
 
-export interface CircleProps {
-  state? : ElementStates,
-  letter? : string,
-  head? : string | React.ReactElement | null,
-  index? : number,
-  tail? : string | React.ReactElement | null,
-  tailType? : 'string' | 'element',
-  extraClass? : string,
-  isSmall? : boolean,
-  onAnimationEnd : React.AnimationEventHandler<HTMLDivElement>,
+interface CircleProps {
+  state? : ElementStates;
+  letter? : string;
+  head? : string | React.ReactElement | null;
+  index? : number;
+  tail? : string | React.ReactElement | null;
+  tailType? : 'string' | 'element';
+  extraClass? : string;
+  isSmall? : boolean;
 }
 
 export interface ColumnProps {

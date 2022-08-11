@@ -3,7 +3,7 @@ import styles from './circle.module.css';
 import { ElementStates } from '../../types/element-states';
 import { CircleProps } from '../../types/prop.types';
 
-const Circle: React.FC<CircleProps> = ({
+export const Circle : React.FC<CircleProps> = ({
   state = ElementStates.Default,
   letter,
   head,
@@ -11,7 +11,6 @@ const Circle: React.FC<CircleProps> = ({
   tail,
   extraClass = '',
   isSmall,
-  onAnimationEnd,
 }) => (
   <div className={`${styles.content} ${extraClass}`}>
     <div
@@ -25,8 +24,7 @@ const Circle: React.FC<CircleProps> = ({
     <div
       className={`${styles.circle}  ${isSmall ? styles.small : ''} ${
         styles[state]
-      }`}
-      onAnimationEnd={onAnimationEnd}>
+      }`}>
       <p
         className={`text text_type_circle text_color_input ${styles.letter}`}>
         {letter}
@@ -46,5 +44,3 @@ const Circle: React.FC<CircleProps> = ({
     </div>
   </div>
 );
-
-export default Circle;
