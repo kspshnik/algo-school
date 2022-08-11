@@ -7,4 +7,5 @@ export type TSortStepResult = {
   currentItem: number,
   isSwitched: boolean,
   doneItems: Array<number>,
+  value: Array<number>,
 };
