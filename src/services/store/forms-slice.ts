@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TFormsSliceState } from '../../types/store.types';
-import { TSortingDirection, TSortingType } from '../../types/types';
+import { TSortingDirection, TSortingChoiceType } from '../../types/types';
 import { NONE } from '../../constants';
 
 const initialState : TFormsSliceState = {
@@ -33,7 +33,7 @@ const formsSlice = createSlice({
     clearRandomArray: (state) => (
       { ...state, randomArray: [] }
     ),
-    setSortingType: (state, action : PayloadAction<TSortingType>) => (
+    setSortingType: (state, action : PayloadAction<TSortingChoiceType>) => (
       { ...state, sortingType: action.payload }
     ),
     clearSortingType: (state) => (
