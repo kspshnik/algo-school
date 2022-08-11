@@ -1,4 +1,4 @@
-import { TSortingType } from './types';
+import { TSortingDirection, TSortingType } from './types';
 
 export type TAlgoViewItem = {
   id: string,
@@ -19,4 +19,5 @@ export type TFormsSliceState = {
   fibonacchiLimit : number,
   randomArray : Array<number>,
   sortingType : TSortingType,
+  sortingDir: TSortingDirection,
 };

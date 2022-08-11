@@ -21,8 +21,11 @@ import {
   clearString,
   setFibonacchiLimit,
   setRandomArray,
-  setSortingType,
   setString,
+  setSortingType,
+  setSortingDirection,
+  clearSortingType,
+  clearSortingDirections,
 } from './forms-slice';
 
 export {
@@ -47,6 +50,9 @@ export {
   setRandomArray,
   clearRandomArray,
   setSortingType,
+  setSortingDirection,
+  clearSortingType,
+  clearSortingDirections,
 };
 
 export type {

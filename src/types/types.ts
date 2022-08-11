@@ -1,6 +1,10 @@
-import { BUBBLE_SORT, INSERTION_SORT } from '../constants/type-literals';
+import {
+  ASC, BUBBLE_SORT, DSC, INSERTION_SORT, NONE,
+} from '../constants/type-literals';
 
-export type TSortingType = typeof BUBBLE_SORT | typeof INSERTION_SORT;
+export type TSortingType = typeof BUBBLE_SORT | typeof INSERTION_SORT | typeof NONE;
+
+export type TSortingDirection = typeof ASC | typeof DSC | typeof NONE;
 
 export type TAlgoData = string | Array<number>;
 
