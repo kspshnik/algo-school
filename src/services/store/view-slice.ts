@@ -7,7 +7,7 @@ import stringReverseReducer, {
   stopStringReverse,
 } from './string-slice';
 import fibonacchiReducer, {
-  nextFibonacchiNumber,
+  nextFibonacchiStep,
   resetFibonacchi,
   startFibonachhi,
   stopFibonacchi,
@@ -29,7 +29,7 @@ export {
   resetSorting,
   startFibonachhi,
   stopFibonacchi,
-  nextFibonacchiNumber,
+  nextFibonacchiStep,
   resetFibonacchi,
   startStringReverse,
   stopStringReverse,

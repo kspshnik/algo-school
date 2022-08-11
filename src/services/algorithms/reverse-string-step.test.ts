@@ -1,4 +1,4 @@
-import { reverseStringStep } from './index';
+import reverseStringStep from './reverse-string-step';
 
 describe('testing border cases', () => {
   const emptyString = '';
