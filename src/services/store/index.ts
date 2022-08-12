@@ -2,6 +2,7 @@ import store, {
   AppDispatch, AppThunk, rootReducer, RootState,
 } from './store';
 import {
+  clearFinishedState,
   nextFibonacchiStep,
   nextSortingStep,
   nextStringReverseStep,
@@ -18,14 +19,14 @@ import {
 import {
   clearFibonacchiLimit,
   clearRandomArray,
+  clearSortingDirections,
+  clearSortingType,
   clearString,
   setFibonacchiLimit,
   setRandomArray,
-  setString,
-  setSortingType,
   setSortingDirection,
-  clearSortingType,
-  clearSortingDirections,
+  setSortingType,
+  setString,
 } from './forms-slice';
 
 export {
@@ -35,6 +36,7 @@ export {
   stopStringReverse,
   nextStringReverseStep,
   resetString,
+  clearFinishedState,
   startFibonachhi,
   stopFibonacchi,
   nextFibonacchiStep,

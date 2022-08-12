@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 
 import stringReverseReducer, {
+  clearFinishedState,
   nextStringReverseStep,
   resetString,
   startStringReverse,
@@ -35,6 +36,7 @@ export {
   stopStringReverse,
   nextStringReverseStep,
   resetString,
+  clearFinishedState,
 };
 
 export default viewReducer;

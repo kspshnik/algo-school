@@ -74,9 +74,10 @@ const FibonacciPage : React.FC = () => {
             value={String(fibonacchiLimit)}
             onChange={handleChange} />
           <Button
-            text='Развернуть'
+            text='Рассчитать'
             disabled={!(fibonacchiLimit > 0
               && fibonacchiLimit <= Number(MAX_NUMBER_FIBONACCHI)) || isActive}
+            isLoader={isActive}
             onClick={handleStartAlgorithm} />
         </div>
       </ControlsLayout>

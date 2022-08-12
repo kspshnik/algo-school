@@ -8,11 +8,11 @@ export type TSortingChoiceType = typeof BUBBLE_SORT | typeof INSERTION_SORT | ty
 export type TSortingType = typeof BUBBLE_SORT | typeof INSERTION_SORT;
 
 export interface SortingGeneratorInterface {
-  (arr: Array<number>) : Generator<TSortStepResult, void, never>,
+  (arr : Array<number>) : Generator<TSortStepResult, void, never>,
 }
 
 export type TSortGeneratorsObject = {
-  [key in TSortingType]: SortingGeneratorInterface;
+  [key in TSortingType] : SortingGeneratorInterface;
 };
 
 export type TSortingDirection = typeof ASC | typeof DSC | typeof NONE;
@@ -23,7 +23,7 @@ export interface AlgorithmsGenerator {
   (data : TAlgoData) : AlgorithmsIterator;
 }
 
-export type AlgorithmsIterator = Generator<string | number | Array<number>, void, never>;
+export type AlgorithmsIterator = Generator<string | Array<number> | TSortStepResult, void, never>;
 
 export interface AlgorithmIterationHookInterface {
   (generator : AlgorithmsGenerator, data : TAlgoData) : React.MutableRefObject<AlgorithmsIterator>,

@@ -85,7 +85,8 @@ const StringReversePage : React.FC = () => {
             text='Развернуть'
             disabled={!(string.length > 0
               && string.length <= Number(MAX_STRING_LENGTH)) || isActive}
-            onClick={handleStartAlgorithm} />
+            onClick={handleStartAlgorithm}
+            isLoader={isActive} />
         </div>
       </ControlsLayout>
       <SolutionLayout>
