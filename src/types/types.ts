@@ -2,13 +2,14 @@ import {
   ASC, BUBBLE_SORT, DSC, INSERTION_SORT, NONE,
 } from '../constants/type-literals';
 import { TSortStepResult } from './algo-struct.types';
+import { Direction } from './direction';
 
 export type TSortingChoiceType = typeof BUBBLE_SORT | typeof INSERTION_SORT | typeof NONE;
 
 export type TSortingType = typeof BUBBLE_SORT | typeof INSERTION_SORT;
 
 export interface SortingGeneratorInterface {
-  (arr : Array<number>) : Generator<TSortStepResult, void, never>,
+  (arr : Array<number>, direction : Direction) : Generator<TSortStepResult, void, never>,
 }
 
 export type TSortGeneratorsObject = {

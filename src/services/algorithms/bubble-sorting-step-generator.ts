@@ -13,12 +13,9 @@ function* bubbleSortingStepGenerator(
     doneItems: [],
     value: [],
   };
-  // const directionMultiplier = direction === Direction.Descending ? -1 : 1;
-  // const directionCorrector = direction === Direction.Ascending;
   const [start, finish, step, corrector] = direction === Direction.Descending
     ? [arr.length - 1, 0, -1, false]
     : [0, arr.length - 1, 1, true];
-  //  let end : number = direction === Direction.Descending ? 0 : arr.length - 1;
   let end : number = finish;
   let base : number = start;
   let current : number;
