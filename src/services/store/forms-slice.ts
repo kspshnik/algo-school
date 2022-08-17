@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TFormsSliceState } from '../../types/store.types';
-import { TSortingDirection, TSortingChoiceType } from '../../types/types';
+import { TSortingChoiceType } from '../../types/types';
 import { NONE } from '../../constants';
+import { Direction } from '../../types/direction';
 
 const initialState : TFormsSliceState = {
   string: '',
   fibonacchiLimit: 0,
   randomArray: [],
   sortingType: NONE,
-  sortingDir: NONE,
 };
 
 const formsSlice = createSlice({
@@ -39,11 +39,11 @@ const formsSlice = createSlice({
     clearSortingType: (state) => (
       { ...state, sortingType: NONE }
     ),
-    setSortingDirection: (state, action: PayloadAction<TSortingDirection>) => (
+    setSortingDirection: (state, action : PayloadAction<Direction>) => (
       { ...state, sortingDir: action.payload }
     ),
     clearSortingDirections: (state) => (
-      { ...state, sortingDir: NONE }
+      { ...state, sortingDir: Direction.Ascending }
     ),
   },
 });

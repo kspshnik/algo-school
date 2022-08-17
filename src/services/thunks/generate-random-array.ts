@@ -1,10 +1,10 @@
-import { AppThunk, nextSortingStep } from '../store';
+import { AppThunk, nextSortingStep, setRandomArray } from '../store';
 import { getRandomArray, makeViewFromArray } from '../helpers';
 import {
   MAX_ARRAY_LENGTH, MAX_VALUE, MIN_ARRAY_LENGTH, MIN_VALUE,
 } from '../../constants';
 
-const setRandomArray : AppThunk = () => (dispatch) => {
+const generateRandomArray : AppThunk = () => (dispatch) => {
   const arr = getRandomArray(
     MIN_VALUE as number,
     MAX_VALUE as number,
@@ -14,3 +14,5 @@ const setRandomArray : AppThunk = () => (dispatch) => {
   dispatch(setRandomArray(arr));
   dispatch(nextSortingStep(makeViewFromArray(arr)));
 };
+
+export default generateRandomArray;

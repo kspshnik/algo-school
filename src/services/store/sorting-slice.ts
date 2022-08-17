@@ -16,9 +16,9 @@ const sortingSlice = createSlice({
       { ...state, isDone: true, isActive: false }
     ),
     nextSortingStep: (state, action : PayloadAction<TAlgoView>) => (
-      { ...state, stringView: action.payload }
+      { ...state, viewData: action.payload }
     ),
-    resetSorting: (state) => (
+    resetSorting: () => (
       { ...initialState }
     ),
   },
