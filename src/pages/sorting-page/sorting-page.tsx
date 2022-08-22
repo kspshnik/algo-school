@@ -26,9 +26,6 @@ const SortingPage : React.FC = () => {
   const anime : React.MutableRefObject<number | null> = React.useRef(null);
 
   const handleStartAlgorithm = (direction : Direction) => {
-    // TODO: разобраться с типизацией!
-    // eslint-disable-next-line max-len
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
     if (!isActive
       && !isFinished
       && (sortingType === INSERTION_SORT || sortingType === BUBBLE_SORT)) {

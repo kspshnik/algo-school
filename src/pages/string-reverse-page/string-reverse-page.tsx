@@ -24,9 +24,6 @@ const StringReversePage : React.FC = () => {
     dispatch(setStringThunk(evt.target.value));
   };
   const handleStartAlgorithm : React.MouseEventHandler<HTMLButtonElement> = () => {
-    // TODO: разобраться с типизацией!
-    // eslint-disable-next-line max-len
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
     if (!isActive && !isFinished) {
       algorithmIterator.current = reverseStringGenerator(string) as AlgorithmsIterator;
       dispatch(startStringReverse());
