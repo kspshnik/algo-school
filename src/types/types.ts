@@ -1,7 +1,7 @@
 import {
   ASC, BUBBLE_SORT, DSC, INSERTION_SORT, NONE,
 } from '../constants/type-literals';
-import { TSortStepResult } from './algo-struct.types';
+import { TSortStepResult, TStringStepResult } from './algo-struct.types';
 import { Direction } from './direction';
 
 export type TSortingChoiceType = typeof BUBBLE_SORT | typeof INSERTION_SORT | typeof NONE;
@@ -24,7 +24,8 @@ export interface AlgorithmsGenerator {
   (data : TAlgoData) : AlgorithmsIterator;
 }
 
-export type AlgorithmsIterator = Generator<string | Array<number> | TSortStepResult, void, never>;
+// eslint-disable-next-line max-len
+export type AlgorithmsIterator = Generator<TStringStepResult | Array<number> | TSortStepResult, void, never>;
 
 export interface AlgorithmIterationHookInterface {
   (generator : AlgorithmsGenerator, data : TAlgoData) : React.MutableRefObject<AlgorithmsIterator>,

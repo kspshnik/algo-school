@@ -5,15 +5,13 @@ const makeViewFromString = (next : string, prev : string, view : TAlgoView) : TA
   const res : TAlgoView = [];
   let i = 0;
   let j = 0;
-  // eslint-disable-next-line no-debugger
-  debugger;
   if (next.length === 0) {
     return res;
   }
   do {
     if (next[i] === prev[j]) { // совпадают
       const {
-        value, isDone, id, isChanging,
+        value, id,
       } = view[i];
       res[i] = value === next[i] ? view[i] : {
         value: next[i], isDone: false, isChanging: false, id,
