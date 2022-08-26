@@ -5,9 +5,9 @@ import { sortingGenerators } from '../../services/algorithms';
 import { useDispatch, useSelector } from '../../services/hooks/store.hooks';
 import { AlgorithmsIterator, TSortingChoiceType } from '../../types/types';
 import { generateRandomArray, stepIntoSorting } from '../../services/thunks';
-import { setSortingType, startSorting } from '../../services/store';
+import { setSortingDirection, setSortingType, startSorting } from '../../services/store';
 import {
-  ASC, BUBBLE_SORT, DELAY_IN_MS, DSC, INSERTION_SORT,
+  ASC, BUBBLE_SORT, DELAY_IN_MS, DSC, INSERTION_SORT, NONE,
 } from '../../constants';
 import { Direction } from '../../types/direction';
 import { getElementState } from '../../services/helpers';
@@ -17,7 +17,7 @@ import { Column } from '../../widgets';
 import { Button, RadioInput } from '../../ui';
 
 const SortingPage : React.FC = () => {
-  const { sortingType, randomArray } = useSelector((state) => state.forms);
+  const { sortingType, randomArray, direction } = useSelector((state) => state.forms);
   const isReady = useSelector((state) => [ASC, DSC].includes(state.forms.sortingType));
   const { viewData, isActive, isFinished } = useSelector((store) => store.view.sort);
   const dispatch = useDispatch();
@@ -25,14 +25,15 @@ const SortingPage : React.FC = () => {
   const algorithmIterator : React.MutableRefObject<AlgorithmsIterator | null> = React.useRef(null);
   const anime : React.MutableRefObject<number | null> = React.useRef(null);
 
-  const handleStartAlgorithm = (direction : Direction) => {
+  const handleStartAlgorithm = (sortingDir : Direction) => {
     if (!isActive
       && !isFinished
       && (sortingType === INSERTION_SORT || sortingType === BUBBLE_SORT)) {
       algorithmIterator.current = sortingGenerators[sortingType](
         randomArray,
-        direction,
+        sortingDir,
       ) as AlgorithmsIterator;
+      dispatch(setSortingDirection(sortingDir));
       dispatch(startSorting());
     }
   };
@@ -101,20 +102,20 @@ const SortingPage : React.FC = () => {
           <fieldset className={styles.submits}>
             <Button
               text='По возрастанию'
-              isLoader={isActive}
+              isLoader={isActive && direction === Direction.Ascending}
               sorting={Direction.Ascending}
-              disabled={isActive && !isReady}
+              disabled={(isActive && !isReady) || sortingType === NONE}
               onClick={handleStartAsc} />
             <Button
               text='По убыванию'
-              isLoader={isActive}
+              isLoader={isActive && direction === Direction.Descending}
               sorting={Direction.Descending}
-              disabled={isActive && !isReady}
+              disabled={(isActive && !isReady) || sortingType === NONE}
               onClick={handleStartDsc} />
           </fieldset>
           <Button
             text='Новый массив'
-            isLoader={isActive}
+            isLoader={false}
             sorting={Direction.Descending}
             disabled={isActive}
             onClick={handleNewRandomArrayRequest} />

@@ -9,6 +9,7 @@ const initialState : TFormsSliceState = {
   fibonacchiLimit: 0,
   randomArray: [],
   sortingType: NONE,
+  direction: null,
 };
 
 const formsSlice = createSlice({
@@ -40,10 +41,10 @@ const formsSlice = createSlice({
       { ...state, sortingType: NONE }
     ),
     setSortingDirection: (state, action : PayloadAction<Direction>) => (
-      { ...state, sortingDir: action.payload }
+      { ...state, direction: action.payload }
     ),
     clearSortingDirections: (state) => (
-      { ...state, sortingDir: Direction.Ascending }
+      { ...state, direction: null }
     ),
   },
 });
