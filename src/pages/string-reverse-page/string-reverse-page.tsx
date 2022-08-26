@@ -5,11 +5,11 @@ import { Button, Input } from '../../ui';
 
 import styles from './string-reverse-page.module.css';
 import { useDispatch, useSelector } from '../../services/hooks/store.hooks';
-import { resetString, startStringReverse } from '../../services/store';
+import { resetString, setString } from '../../services/store';
 import { reverseStringGenerator } from '../../services/algorithms';
 import { AlgorithmsIterator } from '../../types/types';
 import { getElementState } from '../../services/helpers';
-import { setStringThunk, stepIntoReverseString } from '../../services/thunks';
+import { startStringThunk, stepIntoReverseString } from '../../services/thunks';
 import { DELAY_IN_MS, MAX_STRING_LENGTH } from '../../constants';
 
 const StringReversePage : React.FC = () => {
@@ -21,12 +21,12 @@ const StringReversePage : React.FC = () => {
   const anime : React.MutableRefObject<number | null> = React.useRef(null);
   // let anime : ReturnType<typeof setInterval>;
   const handleChange : React.ChangeEventHandler<HTMLInputElement> = (evt) => {
-    dispatch(setStringThunk(evt.target.value));
+    dispatch(setString(evt.target.value));
   };
   const handleStartAlgorithm : React.MouseEventHandler<HTMLButtonElement> = () => {
     if (!isActive) {
       algorithmIterator.current = reverseStringGenerator(string) as AlgorithmsIterator;
-      dispatch(startStringReverse());
+      dispatch(startStringThunk());
     }
   };
 
