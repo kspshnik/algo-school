@@ -10,10 +10,10 @@ const fibonacchiSlice = createSlice({
   initialState,
   reducers: {
     startFibonachhi: (state) => (
-      { ...state, isActive: true, isDone: false }
+      { ...state, isActive: true, isFinished: false }
     ),
     stopFibonacchi: (state) => (
-      { ...state, isDone: true, isActive: false }
+      { ...state, isFinished: true, isActive: false }
     ),
     nextFibonacchiStep: (state, action : PayloadAction<TAlgoView>) => (
       { ...state, viewData: action.payload }

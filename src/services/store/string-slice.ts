@@ -10,7 +10,7 @@ const stringReverseSlice = createSlice({
   initialState,
   reducers: {
     startStringReverse: (state) => (
-      { ...state, isActive: true, isDone: false }
+      { ...state, isActive: true, isFinished: false }
     ),
     stopStringReverse: (state) => (
       { ...state, isFinished: true, isActive: false }
@@ -18,7 +18,7 @@ const stringReverseSlice = createSlice({
     nextStringReverseStep: (state, action : PayloadAction<TAlgoView>) => (
       { ...state, viewData: action.payload }
     ),
-    resetString: (state) => (
+    resetString: () => (
       { ...initialState }
     ),
     clearFinishedState: (state) => (

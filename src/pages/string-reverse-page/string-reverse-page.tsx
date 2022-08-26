@@ -24,7 +24,7 @@ const StringReversePage : React.FC = () => {
     dispatch(setStringThunk(evt.target.value));
   };
   const handleStartAlgorithm : React.MouseEventHandler<HTMLButtonElement> = () => {
-    if (!isActive && !isFinished) {
+    if (!isActive) {
       algorithmIterator.current = reverseStringGenerator(string) as AlgorithmsIterator;
       dispatch(startStringReverse());
     }
@@ -57,15 +57,6 @@ const StringReversePage : React.FC = () => {
       anime.current = null;
     };
   }, [isActive, handleNextStep]);
-
-  /* useEffect(() => {
-     console.log(`Trasitions ended: ${transitionsCount.current}`);
-     if (!!transitionsCount && transitionsCount.current === string.length) {
-       console.log('Firing next step!');
-       dispatch(stepIntoReverseString(algorithmIterator.current));
-       transitionsCount.current = 0;
-     }
-   }, [transitionsCount, string, isActive, dispatch]); */
 
   return (
     <PageLayout title='Строка'>

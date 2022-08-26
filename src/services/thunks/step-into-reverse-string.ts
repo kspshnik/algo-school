@@ -1,5 +1,5 @@
 import { AppThunk, nextStringReverseStep, stopStringReverse } from '../store';
-import { StringAlgorithmIteratorInterface, TStringStepResult } from '../../types/algo-struct.types';
+import { StringAlgorithmIteratorInterface } from '../../types/algo-struct.types';
 
 const stepIntoReverseString : AppThunk = (
   algorithm : StringAlgorithmIteratorInterface,
@@ -8,43 +8,19 @@ const stepIntoReverseString : AppThunk = (
 
   if (isActive && !isFinished) {
     const { value, done } = algorithm.next();
-    const { str, ready, changing } = value as TStringStepResult;
-    if (value) {
-      dispatch(nextStringReverseStep(str.split('').map((chr, index) => ({
-        value: chr,
-        isChanging: changing.includes(index),
-        isDone: ready.includes(index),
-        id: viewData[index].id,
-      }))));
-    }
-
-    if (done || ready.length >= str.length) {
+    if (done) {
       dispatch(stopStringReverse());
+    } else {
+      const { str, ready, changing } = value;
+      if (value) {
+        dispatch(nextStringReverseStep(str.split('').map((chr, index) => ({
+          value: chr,
+          isChanging: changing.includes(index),
+          isDone: ready.includes(index),
+          id: viewData[index].id,
+        }))));
+      }
     }
-
-    /*   if (isChangingNow) {
-         dispatch(nextStringReverseStep(viewData.map(
-           ({
-             isChanging,
-             isDone,
-             value,
-             id,
-           }) => ({
-             value,
-             isDone: isChanging || isDone,
-             isChanging: false,
-             id,
-           }),
-         )));
-       } else {
-         const previous = viewData.map((item) => item.value).join('');
-         const { value, done } = algorithm.next();
-         if (done) {
-           dispatch(stopStringReverse());
-         } else {
-           dispatch(nextStringReverseStep(generateView(value as string, previous, viewData)));
-         }
-       } */
   }
 };
 

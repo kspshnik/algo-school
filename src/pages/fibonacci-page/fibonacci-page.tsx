@@ -5,7 +5,7 @@ import { AlgorithmsIterator } from '../../types/types';
 import { stepIntoFibonacchi } from '../../services/thunks';
 import { fibonacchiGenerator } from '../../services/algorithms';
 import { resetFibonacchi, setFibonacchiLimit, startFibonachhi } from '../../services/store';
-import { DELAY_IN_MS, MAX_NUMBER_FIBONACCHI } from '../../constants';
+import { MAX_NUMBER_FIBONACCHI, SHORT_DELAY_IN_MS } from '../../constants';
 import styles from './fibonacchi-page.module.css';
 import { Button, Input } from '../../ui';
 import Circle from '../../widgets/circle/circle';
@@ -23,7 +23,7 @@ const FibonacciPage : React.FC = () => {
     dispatch(setFibonacchiLimit(Number(evt.target.value)));
   };
   const handleStartAlgorithm : React.MouseEventHandler<HTMLButtonElement> = () => {
-    if (!isActive && !isFinished) {
+    if (!isActive) {
       algorithmIterator.current = fibonacchiGenerator(fibonacchiLimit) as AlgorithmsIterator;
       dispatch(startFibonachhi());
     }
@@ -47,7 +47,7 @@ const FibonacciPage : React.FC = () => {
 
   useEffect(() => {
     if (isActive) {
-      anime.current = setInterval(handleNextStep, DELAY_IN_MS) as unknown as number;
+      anime.current = setInterval(handleNextStep, SHORT_DELAY_IN_MS) as unknown as number;
     } else {
       clearInterval(anime.current as number);
       anime.current = null;

@@ -9,6 +9,7 @@ export type TStringStepResult = {
 };
 
 export type StringAlgorithmIteratorInterface = Generator<TStringStepResult, void, never>;
+export type FibonacchiAlgorithmIteratorInterface = Generator<Array<number>, void, never>;
 
 export type TSortStepResult = {
   baseItem : number,
