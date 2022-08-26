@@ -10,10 +10,10 @@ export type TStringStepResult = {
 
 export type StringAlgorithmIteratorInterface = Generator<TStringStepResult, void, never>;
 export type FibonacchiAlgorithmIteratorInterface = Generator<Array<number>, void, never>;
+export type SortingAlgorithmIteratorInterface = Generator<TSortStepResult, void, never>;
 
 export type TSortStepResult = {
-  baseItem : number,
-  currentItem : number,
-  doneItems : Array<number>,
-  value : Array<number>,
+  active : Array<number>,
+  ready : Array<number>,
+  array : Array<number>,
 };
