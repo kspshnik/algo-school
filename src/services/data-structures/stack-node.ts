@@ -1,17 +1,17 @@
 import AbstractNode from './abstract-node';
 
-class StackNode<T> extends AbstractNode<any> {
-  private _next : StackNode<any> | null;
+class StackNode<T> extends AbstractNode<T> {
+  private _next : StackNode<unknown> | null;
 
-  private _prev : StackNode<any> | null;
+  private _prev : StackNode<unknown> | null;
 
-  constructor(value : T, top : StackNode<any>) {
+  constructor(value : T, top : StackNode<unknown>) {
     super(value);
     this._prev = top;
     this._next = null;
   }
 
-  public putOn(newTop : StackNode<any>) {
+  public putOn(newTop : StackNode<unknown>) {
     this._next = newTop;
   }
 
