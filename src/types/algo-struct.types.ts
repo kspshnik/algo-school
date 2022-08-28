@@ -17,3 +17,16 @@ export type TSortStepResult = {
   ready : Array<number>,
   array : Array<number>,
 };
+export interface AbstractNodeInterface<T> {
+  value : T,
+}
+export interface StackNodeInterface<T> extends AbstractNodeInterface<T> {
+  remove() : void;
+  on : StackNodeInterface<unknown> | null,
+}
+export interface StackInterface {
+  top: StackNodeInterface<unknown> | null,
+  isEmpty: boolean,
+  put(node: StackNodeInterface<unknown>) : void,
+  take() : StackNodeInterface<unknown> | null,
+}

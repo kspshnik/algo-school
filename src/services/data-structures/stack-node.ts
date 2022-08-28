@@ -1,22 +1,28 @@
+import { StackNodeInterface } from '../../types/algo-struct.types';
 import AbstractNode from './abstract-node';
 
-class StackNode<T> extends AbstractNode<T> {
-  private _next : StackNode<unknown> | null;
-
+class StackNode<T> extends AbstractNode<T> implements StackNodeInterface<T> {
   private _prev : StackNode<unknown> | null;
 
-  constructor(value : T, top : StackNode<unknown>) {
+  constructor(value : T, top? : StackNode<unknown>) {
     super(value);
-    this._prev = top;
-    this._next = null;
+    if (top) {
+      this._prev = top;
+    } else {
+      this._prev = null;
+    }
   }
 
-  public putOn(newTop : StackNode<unknown>) {
-    this._next = newTop;
+  public remove() {
+    this._prev = null;
   }
 
-  public takeOff() {
-    this._next = null;
+  get on() : StackNode<unknown> | null {
+    return this._prev;
+  }
+
+  set on(node : StackNode<unknown> | null) {
+    this._prev = node;
   }
 }
 
