@@ -3,7 +3,7 @@ export interface StringReverseGeneratorInterface {
 }
 
 export type TStringStepResult = {
-  str : string,
+  arr : Array<string>,
   changing : Array<number>,
   ready : Array<number>,
 };

@@ -10,16 +10,14 @@ const stepIntoReverseString : AppThunk = (
     const { value, done } = algorithm.next();
     if (done) {
       dispatch(stopStringReverse());
-    } else {
-      const { str, ready, changing } = value;
-      if (value) {
-        dispatch(nextStringReverseStep(str.split('').map((chr, index) => ({
-          value: chr,
-          isChanging: changing.includes(index),
-          isDone: ready.includes(index),
-          id: viewData[index].id,
-        }))));
-      }
+    } else if (value) {
+      const { arr, ready, changing } = value;
+      dispatch(nextStringReverseStep(arr.map((chr, index) => ({
+        value: chr,
+        isChanging: changing.includes(index),
+        isDone: ready.includes(index),
+        id: viewData[index].id,
+      }))));
     }
   }
 };
