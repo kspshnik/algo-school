@@ -47,9 +47,9 @@ const StringReversePage : React.FC = () => {
   }, [isFinished, algorithmIterator]);
   useEffect(() => {
     if (isActive) {
-      anime.current = setInterval(handleNextStep, DELAY_IN_MS) as unknown as number;
-    } else {
-      clearInterval(anime.current as number);
+      anime.current = window.setInterval(handleNextStep, DELAY_IN_MS);
+    } else if (anime.current) {
+      window.clearInterval(anime.current);
       anime.current = null;
     }
     return () => {
