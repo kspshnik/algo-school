@@ -37,4 +37,8 @@ class Stack implements StackInterface {
     }
     return current;
   }
+
+  public peek() : StackNode<unknown> | null {
+    return this._top;
+  }
 }

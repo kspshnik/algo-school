@@ -35,4 +35,6 @@ export interface StackInterface {
   push(node : StackNodeInterface<unknown>) : void,
 
   pop() : StackNodeInterface<unknown> | null,
+
+  peek() : StackNodeInterface<unknown> | null,
 }
