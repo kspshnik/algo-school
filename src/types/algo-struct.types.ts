@@ -1,3 +1,5 @@
+import QueueNode from '../services/data-structures/queue-node';
+
 export interface StringReverseGeneratorInterface {
   (string : string, head : number, tail : number) : string,
 }
@@ -37,4 +39,12 @@ export interface StackInterface {
   pop() : StackNodeInterface<unknown> | null,
 
   peek() : StackNodeInterface<unknown> | null,
+
+  purge() : void,
+}
+
+export interface QueueNodeInterface<T> extends AbstractNodeInterface<T> {
+  prev : QueueNode<unknown> | null;
+
+  remove() : void;
 }
