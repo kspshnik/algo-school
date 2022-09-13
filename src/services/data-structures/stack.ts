@@ -41,4 +41,13 @@ class Stack implements StackInterface {
   public peek() : StackNode<unknown> | null {
     return this._top;
   }
+
+  public purge() : void {
+    let current = this._top;
+    while (current) {
+      this._top = current.on;
+      current.on = null;
+      current = this._top;
+    }
+  }
 }
