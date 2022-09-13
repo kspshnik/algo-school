@@ -23,13 +23,13 @@ class Stack implements StackInterface {
     return new StackNode<typeof node>(node);
   }
 
-  public push(node : StackNode<unknown>) : void {
+  push(node : StackNode<unknown>) : void {
     // eslint-disable-next-line no-param-reassign
     node.on = this._top;
     this._top = node;
   }
 
-  public pop() : StackNode<unknown> | null {
+  pop() : StackNode<unknown> | null {
     const current : StackNode<unknown> | null = this._top;
     if (current) {
       this._top = current.on;
@@ -38,15 +38,15 @@ class Stack implements StackInterface {
     return current;
   }
 
-  public peek() : StackNode<unknown> | null {
+  peek() : StackNode<unknown> | null {
     return this._top;
   }
 
-  public purge() : void {
+  purge() : void {
     let current = this._top;
     while (current) {
       this._top = current.on;
-      current.on = null;
+      current.remove();
       current = this._top;
     }
   }

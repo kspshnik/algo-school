@@ -1,4 +1,5 @@
 import QueueNode from '../services/data-structures/queue-node';
+import ListNode from '../services/data-structures/list-node';
 
 export interface StringReverseGeneratorInterface {
   (string : string, head : number, tail : number) : string,
@@ -47,4 +48,23 @@ export interface QueueNodeInterface<T> extends AbstractNodeInterface<T> {
   prev : QueueNode<unknown> | null;
 
   remove() : void;
+}
+
+export interface ListNodeInterface<T> extends AbstractNodeInterface<T> {
+  prev : ListNode<unknown> | null;
+  next : ListNode<unknown> | null;
+
+  remove() : void;
+}
+
+export interface QueueInterface {
+  readonly tail : QueueNode<unknown> | null;
+  readonly isEmpty : boolean;
+  readonly head : QueueNode<unknown> | null;
+
+  enquenue(node : QueueNode<unknown>) : void;
+
+  dequeue() : QueueNode<unknown> | null;
+
+  purge() : void;
 }
