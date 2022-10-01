@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styles from './button.module.css';
-import loaderIcon from '../../images/icons/loader.svg';
+import loaderIcon from '../../assets/images/icons/loader.svg';
 import { AscendingIcon, DescendingIcon } from '../icons';
 import { Direction } from '../../types/direction';
 import { ButtonProps } from '../../types/prop.types';
