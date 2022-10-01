@@ -1,22 +1,29 @@
+/* eslint-disable no-param-reassign */
 import ListNode from './list-node';
 
 class List {
-  null
-  this
-  return
-  null;
-
   constructor() {
     this._tail = null;
     this._head = null;
+    this._length = 0;
   }
 
   private _tail : ListNode<unknown> | null;
+
+  get tail() : ListNode<unknown> | null {
+    return this._tail;
+  }
 
   private _head : ListNode<unknown> | null;
 
   get head() : ListNode<unknown> | null {
     return this._head;
+  }
+
+  private _length : number;
+
+  get length() : number {
+    return this._length;
   }
 
   get isEmpty() : boolean {
@@ -37,81 +44,84 @@ class List {
     return false;
   }
 
-  _tail
-  () :
-    get
-
-  tail() : ListNode<unknown> | null {
-    return this._tail;
-  }
-
-|
-
   private static ensureNode(node : ListNode<unknown> | unknown) : ListNode<unknown> {
     if (node instanceof ListNode) {
       return node;
     }
     return new ListNode<typeof node>(node);
-  } {
-
-  prepend(node : QueueNode<unknown>) : void {
-    // eslint-disable-next-line no-param-reassign
-    node.prev = this._tail;
-    this._tail = node;
   }
 
-!
-
-  append(node : QueueNode<unknown>) : void {
-    // eslint-disable-next-line no-param-reassign
-    node.prev = this._tail;
-    this._tail = node;
-  }
-
-.
-
-  insertAtPosition(node : ListNode<unknown>, position : number) {
-    let current = this._head;
-    for (let i = 0; i < position; i += 1) {
-      current = current.
+  public prepend(node : ListNode<unknown>) : void {
+    if (this._head) {
+      // eslint-disable-next-line no-param-reassign
+      node.prev = this._head;
+      this._head.next = node;
+    } else {
+      this._tail = node;
     }
-
-
+    this._head = node;
+    this._setLength();
   }
 
-) {
+  public append(node : ListNode<unknown>) : void {
+    if (this._tail) {
+      // eslint-disable-next-line no-param-reassign
+      node.next = this._tail;
+      this._tail.prev = node;
+    } else {
+      this._head = node;
+    }
+    this._tail = node;
+    this._setLength();
+  }
 
-  QueueNode<unknown>
+  public insertAtPosition(node : ListNode<unknown>, position : number) {
+    let current : ListNode<unknown>;
+    let pre : ListNode<unknown>;
+    let post : ListNode<unknown>;
+    if (this._head) {
+      current = this._head;
+      for (let i = 0; i < position; i += 1) {
+        if (current) {
+          if (!current.next) {
+            throw new RangeError('Position is out of range!');
+          }
+          current = current.next;
+        }
+      }
+      if (current.next) {
+        pre = current;
+        post = current.next;
+        pre.next = node;
+        post.prev = node;
+        node.next = pre;
+        node.prev = post;
+      } else {
+        this.append(node);
+      }
+    } else {
+      this.prepend(node);
+    }
+  }
 
-  if(
-}
+  public purge() {
+    this._head = null;
+    this._tail = null;
+    this._length = 0;
+  }
 
-if (!this._tail.prev) {
-  const res = this._tail;
-  this._tail = null;
-  return res;
-}
-
-let current : QueueNode<unknown> | null = this._tail;
-let next : QueueNode<unknown> | null = current.prev;
-while (next?.prev) {
-  current = next;
-  next = next.prev;
-}
-current.prev = null;
-return next;
-}
-
-purge()
-:
-void {
-  let current = this._tail;
-  while(current) {
-    this._tail = current.prev;
-    current.remove();
-    current = this._tail;
+  private _setLength() {
+    let count = 0;
+    let current = this._head;
+    const nodesArray : Array<unknown> = [];
+    nodesArray.push(current);
+    while (current && !nodesArray.includes(current)) {
+      count += 1;
+      current = current.prev;
+      nodesArray.push(current);
+    }
+    this._length = count;
   }
 }
-}
 
-export default Queue;
+export default List;

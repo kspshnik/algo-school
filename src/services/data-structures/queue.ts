@@ -61,12 +61,7 @@ class Queue implements QueueInterface {
   }
 
   purge() : void {
-    let current = this._tail;
-    while (current) {
-      this._tail = current.prev;
-      current.remove();
-      current = this._tail;
-    }
+    this._tail = null;
   }
 }
 
