@@ -1,5 +1,3 @@
-import QueueNode from '../services/data-structures/queue-node';
-
 export interface StringReverseGeneratorInterface {
   (string : string, head : number, tail : number) : string,
 }
@@ -19,28 +17,50 @@ export type TSortStepResult = {
   ready : Array<number>,
   array : Array<number>,
 };
+
 export interface AbstractNodeInterface<T> {
   value : T,
 }
+
 export interface StackNodeInterface<T> extends AbstractNodeInterface<T> {
   remove() : void;
   on : StackNodeInterface<unknown> | null,
 }
+
 export interface StackInterface {
-  top: StackNodeInterface<unknown> | null,
-  isEmpty: boolean,
-  put(node: StackNodeInterface<unknown>) : void,
-  take() : StackNodeInterface<unknown> | null,
+  top : StackNodeInterface<unknown> | null,
+  isEmpty : boolean,
+
+  push(node : StackNodeInterface<unknown>) : void,
+
+  pop() : StackNodeInterface<unknown> | null,
+
+  peek() : StackNodeInterface<unknown> | null,
+
+  purge() : void,
 }
-export interface QueueNodeInterface {
-  readonly prev : QueueNode<unknown> | null;
+
+export interface QueueNodeInterface<T> extends AbstractNodeInterface<T> {
+  prev : QueueNodeInterface<unknown> | null;
+
   remove() : void;
 }
+
+export interface ListNodeInterface<T> extends AbstractNodeInterface<T> {
+  prev : ListNodeInterface<unknown> | null;
+  next : ListNodeInterface<unknown> | null;
+
+  remove() : void;
+}
+
 export interface QueueInterface {
-  readonly last : QueueNode<unknown> | null;
+  readonly tail : QueueNodeInterface<unknown> | null;
   readonly isEmpty : boolean;
+  readonly head : QueueNodeInterface<unknown> | null;
 
-  enqueue(node : QueueNode<unknown>) : void;
+  enquenue(node : QueueNodeInterface<unknown>) : void;
 
-  dequeue() : QueueNode<unknown> | null;
+  dequeue() : QueueNodeInterface<unknown> | null;
+
+  purge() : void;
 }

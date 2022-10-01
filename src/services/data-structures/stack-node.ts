@@ -13,16 +13,17 @@ class StackNode<T> extends AbstractNode<T> implements StackNodeInterface<T> {
     }
   }
 
-  public remove() {
-    this._prev = null;
-  }
-
   get on() : StackNode<unknown> | null {
     return this._prev;
   }
 
   set on(node : StackNode<unknown> | null) {
     this._prev = node;
+  }
+
+  public remove() {
+    this._prev = null;
+    super.destructor();
   }
 }
 

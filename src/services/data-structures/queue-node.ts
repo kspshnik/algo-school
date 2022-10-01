@@ -13,7 +13,7 @@ class QueueNode<T> extends AbstractNode<T> implements QueueNodeInterface {
     }
   }
 
-  remove() {
+  public remove() {
     this._next = null;
   }
 
