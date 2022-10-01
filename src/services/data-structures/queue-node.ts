@@ -1,7 +1,7 @@
 import { QueueNodeInterface } from '../../types/algo-struct.types';
 import AbstractNode from './abstract-node';
 
-class QueueNode<T> extends AbstractNode<T> implements QueueNodeInterface {
+class QueueNode<T> extends AbstractNode<T> implements QueueNodeInterface<T> {
   _next : QueueNode<unknown> | null;
 
   constructor(value : T, last? : QueueNode<unknown>) {
