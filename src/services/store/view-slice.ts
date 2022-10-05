@@ -6,21 +6,26 @@ import stringReverseReducer, {
   resetString,
   startStringReverse,
   stopStringReverse,
-} from './string-slice';
+} from './string-subslice';
 import fibonacchiReducer, {
   nextFibonacchiStep,
   resetFibonacchi,
   startFibonachhi,
   stopFibonacchi,
-} from './fibonacchi-slice';
+} from './fibonacchi-subslice';
 import sortingReducer, {
   nextSortingStep, resetSorting, startSorting, stopSorting,
-} from './sorting-slice';
+} from './sorting-subslice';
+
+import stackReducer, {
+  nextStackStep, resetStack, startStack, stopStack,
+} from './stack-subslice';
 
 const viewReducer = combineReducers({
   string: stringReverseReducer,
   fibonachhi: fibonacchiReducer,
   sort: sortingReducer,
+  stack: stackReducer,
 });
 
 export {
@@ -37,6 +42,10 @@ export {
   nextStringReverseStep,
   resetString,
   clearFinishedState,
+  startStack,
+  stopStack,
+  nextStackStep,
+  resetStack,
 };
 
 export default viewReducer;

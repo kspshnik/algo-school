@@ -1,21 +1,9 @@
-export interface AbstractNodeInterface<T> {
-  value : T,
-}
+import { AbstractNodeInterface } from '../../types/algo-struct.types';
 
 abstract class AbstractNode<T> implements AbstractNodeInterface<T> {
   protected constructor(value : T) {
     this._value = value;
   }
-
-  /*  protected _next : AbstractNode<unknown> | null = null;
-
-  protected _prev : AbstractNode<unknown> | null = null;
-
-  protected _left : AbstractNode<unknown> | null = null;
-
-  protected _right : AbstractNode<unknown> | null = null;
-
-  protected _parent : AbstractNode<unknown> | null = null; */
 
   protected _value : T | null;
 

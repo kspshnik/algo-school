@@ -10,6 +10,8 @@ const initialState : TFormsSliceState = {
   randomArray: [],
   sortingType: NONE,
   direction: null,
+  item: '',
+  index: 0,
 };
 
 const formsSlice = createSlice({
@@ -46,6 +48,18 @@ const formsSlice = createSlice({
     clearSortingDirections: (state) => (
       { ...state, direction: null }
     ),
+    setItem: (state, action : PayloadAction<string>) => (
+      { ...state, item: action.payload }
+    ),
+    clearItem: (state) => (
+      { ...state, item: '' }
+    ),
+    setIndex: (state, action) => (
+      { ...state, index: action.payload }
+    ),
+    clearIndex: (state) => (
+      { ...state, index: 0 }
+    ),
   },
 });
 
@@ -62,6 +76,10 @@ export const {
   setSortingDirection,
   clearSortingType,
   clearSortingDirections,
+  setItem,
+  clearItem,
+  setIndex,
+  clearIndex,
 } = formsSlice.actions;
 
 export default formsReducer;

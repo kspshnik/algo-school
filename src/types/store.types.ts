@@ -7,6 +7,13 @@ export type TAlgoViewItem = {
   isDone : boolean,
   value : string | number,
 };
+
+export type TStructViewItem = [
+  TAlgoViewItem | string | null,
+  TAlgoViewItem,
+  TAlgoViewItem | string | null,
+];
+export type TStructView = Array<TStructViewItem>;
 export type TAlgoView = Array<TAlgoViewItem>;
 
 export type TAlgoSliceState = {
@@ -15,10 +22,17 @@ export type TAlgoSliceState = {
   isActive : boolean,
 };
 
+export type TStructSliceState = {
+  viewData : TStructView,
+  isFinished : boolean,
+  isActive : boolean,
+};
 export type TFormsSliceState = {
   string : string,
   fibonacchiLimit : number,
   randomArray : Array<number>,
   sortingType : TSortingChoiceType,
   direction : Direction | null,
+  item : string,
+  index : number,
 };

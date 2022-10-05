@@ -8,28 +8,28 @@ class Stack implements StackInterface {
 
   private _top : StackNode<unknown> | null;
 
-  get top() : StackNode<unknown> | null {
+  public get top() : StackNode<unknown> | null {
     return this._top;
   }
 
-  get isEmpty() : boolean {
+  public get isEmpty() : boolean {
     return !!this._top;
   }
 
-  private static ensureNode(node : StackNode<unknown> | unknown) : StackNode<unknown> {
+  public static ensureNode(node : StackNode<unknown> | unknown) : StackNode<unknown> {
     if (node instanceof StackNode) {
       return node;
     }
     return new StackNode<typeof node>(node);
   }
 
-  push(node : StackNode<unknown>) : void {
+  public push(node : StackNode<unknown>) : void {
     // eslint-disable-next-line no-param-reassign
     node.on = this._top;
     this._top = node;
   }
 
-  pop() : StackNode<unknown> | null {
+  public pop() : StackNode<unknown> | null {
     const current : StackNode<unknown> | null = this._top;
     if (current) {
       this._top = current.on;
@@ -38,11 +38,11 @@ class Stack implements StackInterface {
     return current;
   }
 
-  peek() : StackNode<unknown> | null {
+  public peek() : StackNode<unknown> | null {
     return this._top;
   }
 
-  purge() : void {
+  public purge() : void {
     let current = this._top;
     while (current) {
       this._top = current.on;
@@ -50,4 +50,16 @@ class Stack implements StackInterface {
       current = this._top;
     }
   }
+
+  public toArray() : Array<StackNode<unknown>> {
+    let current : StackNode<unknown> | null = this._top;
+    const res : Array<StackNode<unknown>> = [];
+    while (current) {
+      res.push(current);
+      current = current.on;
+    }
+    return res;
+  }
 }
+
+export default Stack;

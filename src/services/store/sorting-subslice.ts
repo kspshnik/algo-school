@@ -5,7 +5,7 @@ import { algoInitialState } from '../../constants';
 
 const initialState = algoInitialState;
 
-const sortingSlice = createSlice({
+const sortingSubslice = createSlice({
   name: 'sorting',
   initialState,
   reducers: {
@@ -24,13 +24,13 @@ const sortingSlice = createSlice({
   },
 });
 
-const sortingReducer = sortingSlice.reducer;
+const sortingReducer = sortingSubslice.reducer;
 
 export const {
   startSorting,
   stopSorting,
   nextSortingStep,
   resetSorting,
-} = sortingSlice.actions;
+} = sortingSubslice.actions;
 
 export default sortingReducer;

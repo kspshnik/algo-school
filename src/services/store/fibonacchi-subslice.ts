@@ -5,7 +5,7 @@ import { algoInitialState } from '../../constants';
 
 const initialState = algoInitialState;
 
-const fibonacchiSlice = createSlice({
+const fibonacchiSubslice = createSlice({
   name: 'fibonacchi',
   initialState,
   reducers: {
@@ -24,13 +24,13 @@ const fibonacchiSlice = createSlice({
   },
 });
 
-const fibonacchiReducer = fibonacchiSlice.reducer;
+const fibonacchiReducer = fibonacchiSubslice.reducer;
 
 export const {
   startFibonachhi,
   stopFibonacchi,
   nextFibonacchiStep,
   resetFibonacchi,
-} = fibonacchiSlice.actions;
+} = fibonacchiSubslice.actions;
 
 export default fibonacchiReducer;
