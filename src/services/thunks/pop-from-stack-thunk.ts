@@ -7,8 +7,10 @@ import { SHORT_DELAY_IN_MS } from '../../constants';
 const popFromStackThunk : AppThunk = (stack : Stack) => (dispatch, getState) => {
   const { viewData } = getState().view.stack;
   let freshView : TStructView;
+  console.dir(viewData);
   freshView = [...viewData];
-  const [top, { id, value }, bottom] = freshView[freshView.length - 1] as TStructViewItem;
+  console.dir(freshView);
+  const [top, { id, value }, bottom] = freshView[freshView.length - 1];
   freshView[freshView.length - 1] = [top,
     {
       id,
@@ -21,9 +23,11 @@ const popFromStackThunk : AppThunk = (stack : Stack) => (dispatch, getState) => 
   dispatch(nextStackStep(freshView));
   stack.pop();
   setTimeout(() => {
-    freshView = [...viewData] as TStructView;
-    const [, base, tail] = freshView[freshView.length - 1];
-    freshView[freshView.length - 1] = ['top', base, tail] as TStructViewItem;
+    freshView = viewData.slice(0, viewData.length - 1);
+    if (freshView.length > 0) {
+      const [, base, tail] = freshView[freshView.length - 1];
+      freshView[freshView.length - 1] = ['top', base, tail] as TStructViewItem;
+    }
     dispatch(nextStackStep(freshView));
     dispatch(stopStack());
   }, SHORT_DELAY_IN_MS);

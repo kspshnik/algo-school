@@ -9,29 +9,26 @@ const pushToStackThunk : AppThunk = (stack : Stack, newItem : string) => (dispat
   const { viewData } = getState().view.stack;
   const node = new StackNode<string>(newItem);
   let freshView : TStructView;
+  // const stackArray = stack.toArray();
+  // viewData.length = stackArray.length;
+  //  freshView = stackArray.map()
+  freshView = viewData.map(([top, base, bottom]) => [null, base, bottom] as TStructViewItem);
+  const newCortege : TStructViewItem = [
+    'top',
+    {
+      id: nanoid(24),
+      isDone: false,
+      isChanging: true,
+      value: node.value,
+    },
+    null,
+  ];
+  const newViewData = [...freshView, newCortege];
+  dispatch(nextStackStep(newViewData));
   stack.push(node);
-  const stackArray = stack.toArray();
-  viewData.length = stackArray.length;
-  freshView = viewData.map((item, index) => {
-    if (item) {
-      const [top, base, bottom] = item;
-      return [null, base, bottom] as TStructViewItem;
-    }
-    return [
-      'top',
-      {
-        id: nanoid(24),
-        isDone: false,
-        isChanging: true,
-        value: stackArray[index].value,
-      },
-      String(index),
-    ] as TStructViewItem;
-  });
-  dispatch(nextStackStep(freshView));
   setTimeout(() => {
-    freshView = [...viewData];
-    const [top, { id, value }, bottom] = freshView[freshView.length - 1] as TStructViewItem;
+    freshView = [...newViewData];
+    const [top, { id, value }, bottom] = freshView[freshView.length - 1];
     freshView[freshView.length - 1] = [top,
       {
         id,

@@ -13,7 +13,7 @@ class Stack implements StackInterface {
   }
 
   public get isEmpty() : boolean {
-    return !!this._top;
+    return this._top === null;
   }
 
   public static ensureNode(node : StackNode<unknown> | unknown) : StackNode<unknown> {

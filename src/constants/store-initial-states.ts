@@ -8,7 +8,7 @@ export const algoInitialState : TAlgoSliceState = {
 };
 
 export const structInitialState : TStructSliceState = {
-  isFinished: false,
+  isFinished: true,
   viewData: [],
   isActive: false,
 };

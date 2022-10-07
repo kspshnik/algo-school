@@ -54,7 +54,7 @@ const formsSlice = createSlice({
     clearItem: (state) => (
       { ...state, item: '' }
     ),
-    setIndex: (state, action) => (
+    setIndex: (state, action : PayloadAction<number>) => (
       { ...state, index: action.payload }
     ),
     clearIndex: (state) => (
