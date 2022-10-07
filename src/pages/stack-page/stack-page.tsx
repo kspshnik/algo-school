@@ -18,7 +18,7 @@ type TStackAction = 'PUSH' | 'POP' | 'PURGE';
 
 const StackPage : React.FC = () => {
   const { item } = useSelector((state) => state.forms);
-  const { viewData, isActive, isFinished } = useSelector((store) => store.view.stack);
+  const { viewData, isActive, isFinished } = useSelector((state) => state.view.stack);
   const dispatch = useDispatch();
   const [stackAction, setStackAction] = React.useState<TStackAction | null>(null);
 
@@ -94,18 +94,18 @@ const StackPage : React.FC = () => {
             <Button
               text='Добавить'
               isLoader={isActive && stackAction === 'PUSH'}
-              disabled={(isActive && !!stackAction && ['POP', 'PURGE'].includes(stackAction))}
+              disabled={(isActive && !!stackAction && ['POP', 'PURGE'].includes(stackAction)) || item.length === 0}
               onClick={handlePush} />
             <Button
               text='Удалить'
               isLoader={isActive && stackAction === 'POP'}
-              disabled={(isActive && !!stackAction && ['PUSH', 'PURGE'].includes(stackAction)) || stack.current?.isEmpty}
+              disabled={(isActive && !!stackAction && ['PUSH', 'PURGE'].includes(stackAction)) || viewData.length === 0}
               onClick={handlePop} />
           </fieldset>
           <Button
             text='Очистить'
             isLoader={isActive && stackAction === 'PURGE'}
-            disabled={(isActive && !!stackAction && ['PUSH', 'POP'].includes(stackAction)) || stack.current?.isEmpty}
+            disabled={(isActive && !!stackAction && ['PUSH', 'POP'].includes(stackAction)) || viewData.length === 0}
             onClick={handlePurge} />
         </div>
       </ControlsLayout>
