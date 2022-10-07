@@ -21,11 +21,16 @@ import stackReducer, {
   nextStackStep, resetStack, startStack, stopStack,
 } from './stack-subslice';
 
+import queueReducer, {
+  startQueue, stopQueue, nextQueueStep, resetQueue,
+} from './queue-subslice';
+
 const viewReducer = combineReducers({
   string: stringReverseReducer,
   fibonachhi: fibonacchiReducer,
   sort: sortingReducer,
   stack: stackReducer,
+  queue: queueReducer,
 });
 
 export {
@@ -46,6 +51,10 @@ export {
   stopStack,
   nextStackStep,
   resetStack,
+  startQueue,
+  stopQueue,
+  nextQueueStep,
+  resetQueue,
 };
 
 export default viewReducer;
