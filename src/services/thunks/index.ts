@@ -5,6 +5,7 @@ import stepIntoSorting from './step-into-sorting';
 import generateRandomArray from './generate-random-array';
 import pushToStackThunk from './push-to-stack-thunk';
 import popFromStackThunk from './pop-from-stack-thunk';
+import enqueueThunk from './enqueue-thunk';
 
 export {
   stepIntoReverseString,
@@ -14,4 +15,5 @@ export {
   generateRandomArray,
   pushToStackThunk,
   popFromStackThunk,
+  enqueueThunk,
 };

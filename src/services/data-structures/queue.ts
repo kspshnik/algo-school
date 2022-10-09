@@ -3,28 +3,40 @@ import { QueueInterface } from '../../types/algo-struct.types';
 
 class Queue implements QueueInterface {
   constructor() {
+    this._head = null;
     this._tail = null;
+    this._length = 0;
   }
+
+  private _head : QueueNode<unknown> | null;
 
   private _tail : QueueNode<unknown> | null;
 
-  get tail() : QueueNode<unknown> | null {
+  private _length : number;
+
+  public get tail() : QueueNode<unknown> | null {
     return this._tail;
   }
 
-  get isEmpty() : boolean {
+  public get isEmpty() : boolean {
     return !!this._tail;
   }
 
-  get head() : QueueNode<unknown> | null {
+  public get head() : QueueNode<unknown> | null {
+    return this._head;
+  }
+
+  public get length() : number {
     let current : QueueNode<unknown> | null = this._tail;
+    let count = 0;
     if (!current) {
-      return null;
+      return count;
     }
-    while (current.prev) {
-      current = current.prev;
+    while (!!current && current !== this._head) {
+      count += 1;
+      current = current.prev ? current.prev : null;
     }
-    return current;
+    return count;
   }
 
   private static ensureNode(node : QueueNode<unknown> | unknown) : QueueNode<unknown> {
@@ -34,19 +46,25 @@ class Queue implements QueueInterface {
     return new QueueNode<typeof node>(node);
   }
 
-  enquenue(node : QueueNode<unknown>) : void {
+  public enquenue(node : QueueNode<unknown>) : void {
     // eslint-disable-next-line no-param-reassign
-    node.prev = this._tail;
+    node.prev = this._tail ? this._tail : null;
     this._tail = node;
+    if (!this._head) {
+      this._head = node;
+    }
+    this._length += 1;
   }
 
-  dequeue() : QueueNode<unknown> | null {
+  public dequeue() : QueueNode<unknown> | null {
     if (!this._tail) {
       return null;
     }
     if (!this._tail.prev) {
       const res = this._tail;
       this._tail = null;
+      this._head = null;
+      this._length = 0;
       return res;
     }
 
@@ -57,11 +75,15 @@ class Queue implements QueueInterface {
       next = next.prev;
     }
     current.prev = null;
+    this._head = current;
+    this._length -= 1;
     return next;
   }
 
-  purge() : void {
+  public purge() : void {
+    this._head = null;
     this._tail = null;
+    this._length = 0;
   }
 }
 

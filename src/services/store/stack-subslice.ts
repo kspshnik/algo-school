@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { structInitialState } from '../../constants/store-initial-states';
+import { stackInitialState } from '../../constants/store-initial-states';
 import { TStructView } from '../../types/store.types';
 
-const initialState = structInitialState;
+const initialState = stackInitialState;
 
 const stackSubslice = createSlice({
   name: 'stack',
@@ -20,6 +20,12 @@ const stackSubslice = createSlice({
     resetStack: () => (
       { ...initialState }
     ),
+    setStackStart: (state, action: PayloadAction<number>) => (
+      { ...state, start: action.payload }
+    ),
+    setStackEnd: (state, action: PayloadAction<number>) => (
+      { ...state, end: action.payload }
+    ),
   },
 });
 
@@ -30,6 +36,8 @@ export const {
   stopStack,
   nextStackStep,
   resetStack,
+  setStackStart,
+  setStackEnd,
 } = stackSubslice.actions;
 
 export default stackReducer;

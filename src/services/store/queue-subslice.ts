@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { structInitialState } from '../../constants/store-initial-states';
+import { queueInitialState } from '../../constants/store-initial-states';
 import { TStructSliceState, TStructView } from '../../types/store.types';
 
-const initialState : TStructSliceState = structInitialState;
+const initialState : TStructSliceState = queueInitialState;
 
 const queueSubslice = createSlice({
   name: 'queue',
@@ -20,6 +20,12 @@ const queueSubslice = createSlice({
     resetQueue: () => (
       { ...initialState }
     ),
+    setQueueStart: (state, action: PayloadAction<number>) => (
+      { ...state, start: action.payload }
+    ),
+    setQueueEnd: (state, action: PayloadAction<number>) => (
+      { ...state, end: action.payload }
+    ),
   },
 });
 
@@ -30,6 +36,8 @@ export const {
   stopQueue,
   nextQueueStep,
   resetQueue,
+  setQueueStart,
+  setQueueEnd,
 } = queueSubslice.actions;
 
 export default queueReducer;

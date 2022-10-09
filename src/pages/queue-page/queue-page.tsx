@@ -3,7 +3,7 @@ import { ControlsLayout, PageLayout, SolutionLayout } from '../../layouts';
 
 import { useDispatch, useSelector } from '../../services/hooks/store.hooks';
 import {
-  clearItem, resetStack, setItem, startStack, stopStack,
+  clearItem, setItem, startQueue,
 } from '../../services/store';
 import { SHORT_DELAY_IN_MS } from '../../constants';
 import { getElementState } from '../../services/helpers';
@@ -11,7 +11,7 @@ import { getElementState } from '../../services/helpers';
 import styles from './stack-page.module.css';
 import { Button, Input } from '../../ui';
 import Stack from '../../services/data-structures/stack';
-import { popFromStackThunk, pushToStackThunk } from '../../services/thunks';
+import { enqueueThunk } from '../../services/thunks';
 import { Circle } from '../../widgets';
 import Queue from '../../services/data-structures/queue';
 
@@ -27,23 +27,23 @@ const QueuePage : React.FC = () => {
 
   const handleEnquene : React.MouseEventHandler<HTMLButtonElement> = () => {
     if (!isActive
-      && isFinished) {
+      && isFinished && queue.current && queue.current.length < 7) {
       dispatch(startQueue());
       setQueueAction('ENQUEUE');
-      dispatch(pushToStackThunk(stack.current, item));
+      dispatch(enqueueThunk(queue.current, item));
       dispatch(clearItem());
-      setStackAction(null);
+      setQueueAction(null);
     }
   };
 
-  const handlePop : React.MouseEventHandler<HTMLButtonElement> = () => {
+  const handleDequeue : React.MouseEventHandler<HTMLButtonElement> = () => {
     if (!isActive
-      && isFinished) {
-      dispatch(startStack());
-      setStackAction('POP');
-      dispatch(popFromStackThunk(stack.current));
+      && isFinished && queue.current && queue.current.length > 0) {
+      dispatch(startQueue());
+      setQueueAction('DEQUEUE');
+      dispatch(popFromStackThunk(queue.current));
       dispatch(clearItem());
-      setStackAction(null);
+      setQueueAction(null);
     }
   };
 
@@ -51,7 +51,7 @@ const QueuePage : React.FC = () => {
     if (!isActive
       && isFinished) {
       dispatch(startStack());
-      setStackAction('PURGE');
+      setQueueAction('PURGE');
       setTimeout(() => {
         dispatch(resetStack());
         dispatch(stopStack());
