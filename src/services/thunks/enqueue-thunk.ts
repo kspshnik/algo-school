@@ -2,19 +2,23 @@ import { nanoid } from '@reduxjs/toolkit';
 import {
   AppThunk, nextQueueStep, setQueueEnd, stopQueue,
 } from '../store';
-import { TStructViewItem } from '../../types/store.types';
+import { TStructView, TStructViewItem } from '../../types/store.types';
 import { SHORT_DELAY_IN_MS } from '../../constants';
 import QueueNode from '../data-structures/queue-node';
 import Queue from '../data-structures/queue';
 
 const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, getState) => {
-  const { viewData, start, end } = getState().view.stack;
+  const { viewData, start, end } = getState().view.queue;
   const node = new QueueNode<string>(newItem);
   if (end === 6) {
     return null;
   }
-  const freshView = viewData;
-  const pos = start === end ? end : end + 1;
+  console.log('viewData:');
+  console.dir(viewData);
+  const freshView = [...viewData];
+  console.log('freshView:');
+  console.dir(freshView);
+  let pos : number;
   let tuple : TStructViewItem;
   if (start === end) {
     pos = end;
@@ -45,13 +49,20 @@ const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, 
       'tail',
     ];
   }
+
   freshView[pos] = tuple;
   dispatch(nextQueueStep(freshView));
   queue.enquenue(node);
   setQueueEnd(pos);
+  let newView : TStructView;
   setTimeout(() => {
+    newView = [...freshView];
+    console.log('newView in callback');
+    console.dir(newView);
+    console.log(`pos = ${pos}\nnewView[pos]:`);
+    console.dir(newView[pos]);
     const [top, { id, value }, bottom] = freshView[pos];
-    freshView[pos] = [top,
+    tuple = [top,
       {
         id,
         value,
@@ -60,7 +71,8 @@ const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, 
       },
       bottom,
     ];
-    dispatch(nextQueueStep(freshView));
+    newView[pos] = tuple;
+    dispatch(nextQueueStep(newView));
     dispatch(stopQueue());
   }, SHORT_DELAY_IN_MS);
 };

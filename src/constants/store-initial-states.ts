@@ -1,5 +1,5 @@
-import { TAlgoSliceState, TStructSliceState, TStructView } from '../types/store.types';
-import { makeEmptyTuple } from '../services/helpers';
+import { TAlgoSliceState, TStructSliceState } from '../types/store.types';
+import { makeQueueInitialView } from '../services/helpers';
 
 export const algoInitialState : TAlgoSliceState = {
   isFinished: false,
@@ -17,7 +17,7 @@ export const stackInitialState : TStructSliceState = {
 
 export const queueInitialState : TStructSliceState = {
   isFinished: true,
-  viewData: Array(7).fill(makeEmptyTuple()) as TStructView,
+  viewData: makeQueueInitialView(7),
   isActive: false,
   start: 0,
   end: 0,

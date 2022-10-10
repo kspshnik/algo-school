@@ -3,15 +3,14 @@ import { ControlsLayout, PageLayout, SolutionLayout } from '../../layouts';
 
 import { useDispatch, useSelector } from '../../services/hooks/store.hooks';
 import {
-  clearItem, setItem, startQueue,
+  clearItem, resetQueue, setItem, startQueue, stopQueue,
 } from '../../services/store';
 import { SHORT_DELAY_IN_MS } from '../../constants';
 import { getElementState } from '../../services/helpers';
 
-import styles from './stack-page.module.css';
+import styles from './queue-page.module.css';
 import { Button, Input } from '../../ui';
-import Stack from '../../services/data-structures/stack';
-import { enqueueThunk } from '../../services/thunks';
+import { dequeueThunk, enqueueThunk } from '../../services/thunks';
 import { Circle } from '../../widgets';
 import Queue from '../../services/data-structures/queue';
 
@@ -41,7 +40,7 @@ const QueuePage : React.FC = () => {
       && isFinished && queue.current && queue.current.length > 0) {
       dispatch(startQueue());
       setQueueAction('DEQUEUE');
-      dispatch(popFromStackThunk(queue.current));
+      dispatch(dequeueThunk(queue.current));
       dispatch(clearItem());
       setQueueAction(null);
     }
@@ -50,12 +49,12 @@ const QueuePage : React.FC = () => {
   const handlePurge : React.MouseEventHandler<HTMLButtonElement> = () => {
     if (!isActive
       && isFinished) {
-      dispatch(startStack());
+      dispatch(startQueue());
       setQueueAction('PURGE');
       setTimeout(() => {
-        dispatch(resetStack());
-        dispatch(stopStack());
-        setStackAction(null);
+        dispatch(resetQueue());
+        dispatch(stopQueue());
+        setQueueAction(null);
         dispatch(clearItem());
       }, SHORT_DELAY_IN_MS);
     }
@@ -67,20 +66,20 @@ const QueuePage : React.FC = () => {
     }
   };
   useEffect(() => {
-    dispatch(resetStack());
-    stack.current = new Stack();
+    dispatch(resetQueue());
+    queue.current = new Queue();
     return () => {
-      stack.current = null;
+      queue.current = null;
     };
   }, [dispatch]);
   useEffect(() => {
     if (!isActive || isFinished) {
-      setStackAction(null);
+      setQueueAction(null);
     }
   }, [isActive, isFinished]);
 
   return (
-    <PageLayout title='Стек'>
+    <PageLayout title='Очередь'>
       <ControlsLayout>
         <div className={styles.controls}>
           <fieldset className={styles.submits}>
@@ -94,19 +93,43 @@ const QueuePage : React.FC = () => {
               onChange={handleInputChange} />
             <Button
               text='Добавить'
-              isLoader={isActive && stackAction === 'PUSH'}
-              disabled={(isActive && !!stackAction && ['POP', 'PURGE'].includes(stackAction)) || item.length === 0}
-              onClick={handlePush} />
+              isLoader={isActive
+                && queueAction === 'ENQUEUE'}
+              disabled={
+                !queue.current
+                || (isActive
+                  && !!queueAction
+                  && ['DEQUEUE', 'PURGE'].includes(queueAction)
+                  && queue.current.length < 7)
+                || item.length === 0
+              }
+              onClick={handleEnquene} />
             <Button
               text='Удалить'
-              isLoader={isActive && stackAction === 'POP'}
-              disabled={(isActive && !!stackAction && ['PUSH', 'PURGE'].includes(stackAction)) || viewData.length === 0}
-              onClick={handlePop} />
+              isLoader={isActive && queueAction === 'DEQUEUE'}
+              disabled={
+                !queue.current
+                || (isActive
+                  && !!queueAction
+                  && ['ENQUEUE', 'PURGE'].includes(queueAction)
+                  && queue.current
+                  && queue.current.length < 1
+                )
+                || viewData.length === 0
+              }
+              onClick={handleDequeue} />
           </fieldset>
           <Button
             text='Очистить'
-            isLoader={isActive && stackAction === 'PURGE'}
-            disabled={(isActive && !!stackAction && ['PUSH', 'POP'].includes(stackAction)) || viewData.length === 0}
+            isLoader={isActive && queueAction === 'PURGE'}
+            disabled={
+              !queue.current
+              || (isActive
+                && !!queueAction
+                && ['ENQUEUE', 'DEQUEUE'].includes(queueAction)
+                && queue.current.length > 0)
+              || viewData.length === 0
+            }
             onClick={handlePurge} />
         </div>
       </ControlsLayout>
@@ -121,13 +144,15 @@ const QueuePage : React.FC = () => {
                 isChanging,
                 id,
               },
+              tail,
             ], index) => (
               <Circle
                 key={id}
                 head={head as string}
                 letter={value as string}
                 index={index}
-                state={getElementState(isChanging, isDone)} />
+                state={getElementState(isChanging, isDone)}
+                tail={tail as string} />
               // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             ))}
           </div>
@@ -137,4 +162,4 @@ const QueuePage : React.FC = () => {
   );
 };
 
-export default StackPage;
+export default QueuePage;
