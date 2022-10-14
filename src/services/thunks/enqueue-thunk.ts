@@ -20,7 +20,8 @@ const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, 
   console.dir(freshView);
   let pos : number;
   let tuple : TStructViewItem;
-  if (start === end) {
+  console.log(`freshView[end][1].value = '${freshView[end][1].value}', !!freshView[end][1].value = ${!freshView[end][1].value}`);
+  if (start === end && !freshView[end][1].value) {
     pos = end;
     tuple = [
       'head',
@@ -34,9 +35,9 @@ const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, 
     ];
   } else {
     pos = end + 1;
-    let [head, base, tail] = freshView[end];
+    const [head, base] = freshView[end];
     freshView[end] = [head, base, null];
-    [head, base, tail] = freshView[pos];
+    // [head, base] = freshView[pos];
 
     tuple = [
       null,
@@ -53,7 +54,7 @@ const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, 
   freshView[pos] = tuple;
   dispatch(nextQueueStep(freshView));
   queue.enquenue(node);
-  setQueueEnd(pos);
+  dispatch(setQueueEnd(pos));
   let newView : TStructView;
   setTimeout(() => {
     newView = [...freshView];
@@ -75,6 +76,7 @@ const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, 
     dispatch(nextQueueStep(newView));
     dispatch(stopQueue());
   }, SHORT_DELAY_IN_MS);
+  return null;
 };
 
 export default enqueueThunk;
