@@ -2,19 +2,17 @@ import {
   AppThunk, nextQueueStep, setQueueStart, stopQueue,
 } from '../store';
 import { SHORT_DELAY_IN_MS } from '../../constants';
-import QueueNode from '../data-structures/queue-node';
 import Queue from '../data-structures/queue';
 
 const dequeueThunk : AppThunk = (queue : Queue) => (dispatch, getState) => {
-  const { viewData, start, end } = getState().view.queue;
+  const { start, end } = getState().view.queue;
   if (queue.length < 1 || start > end) {
-    console.log('Фихня какая-то!');
     return null;
   }
-  const freshView = [...viewData];
+  let view = [...getState().view.queue.viewData];
   let pos = start;
-  let [head, { id, value }, tail] = freshView[pos];
-  freshView[pos] = [
+  let [head, { id, value }, tail] = view[pos];
+  view[pos] = [
     head,
     {
       id,
@@ -24,14 +22,14 @@ const dequeueThunk : AppThunk = (queue : Queue) => (dispatch, getState) => {
     },
     tail,
   ];
-  dispatch(nextQueueStep(freshView));
+  dispatch(nextQueueStep(view));
   queue.dequeue();
   pos = start === end ? start : start + 1;
-  const newView = [...freshView];
+  view = [...getState().view.queue.viewData];
   setTimeout(() => {
-    [head, { id, value }, tail] = newView[pos];
+    [head, { id, value }, tail] = view[pos];
     if (start === pos) {
-      newView[pos] = [
+      view[pos] = [
         null,
         {
           id,
@@ -42,7 +40,7 @@ const dequeueThunk : AppThunk = (queue : Queue) => (dispatch, getState) => {
         null,
       ];
     } else {
-      newView[pos] = [
+      view[pos] = [
         'head',
         {
           id,
@@ -52,8 +50,8 @@ const dequeueThunk : AppThunk = (queue : Queue) => (dispatch, getState) => {
         },
         tail,
       ];
-      [head, { id, value }, tail] = freshView[start];
-      newView[start] = [
+      [head, { id, value }, tail] = view[start];
+      view[start] = [
         null,
         {
           id,
@@ -65,7 +63,7 @@ const dequeueThunk : AppThunk = (queue : Queue) => (dispatch, getState) => {
       ];
     }
 
-    dispatch(nextQueueStep(newView));
+    dispatch(nextQueueStep(view));
     dispatch(setQueueStart(start + 1));
     dispatch(stopQueue());
   }, SHORT_DELAY_IN_MS);
