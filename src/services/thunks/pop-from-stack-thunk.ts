@@ -1,11 +1,13 @@
-import { AppThunk, nextStackStep, stopStack } from '../store';
+import {
+  AppThunk, nextStackStep, setStackEnd, stopStack,
+} from '../store';
 
 import Stack from '../data-structures/stack';
 import { TStructView, TStructViewItem } from '../../types/store.types';
 import { SHORT_DELAY_IN_MS } from '../../constants';
 
 const popFromStackThunk : AppThunk = (stack : Stack) => (dispatch, getState) => {
-  const { viewData } = getState().view.stack;
+  const { viewData, end } = getState().view.stack;
   let freshView : TStructView;
   console.dir(viewData);
   freshView = [...viewData];
@@ -22,6 +24,7 @@ const popFromStackThunk : AppThunk = (stack : Stack) => (dispatch, getState) => 
   ];
   dispatch(nextStackStep(freshView));
   stack.pop();
+  setStackEnd(end - 1);
   setTimeout(() => {
     freshView = viewData.slice(0, viewData.length - 1);
     if (freshView.length > 0) {

@@ -18,14 +18,19 @@ import sortingReducer, {
 } from './sorting-subslice';
 
 import stackReducer, {
-  nextStackStep, resetStack, startStack, stopStack,
+  nextStackStep, resetStack, startStack, stopStack, setStackStart, setStackEnd,
 } from './stack-subslice';
+
+import queueReducer, {
+  startQueue, stopQueue, nextQueueStep, resetQueue, setQueueStart, setQueueEnd,
+} from './queue-subslice';
 
 const viewReducer = combineReducers({
   string: stringReverseReducer,
   fibonachhi: fibonacchiReducer,
   sort: sortingReducer,
   stack: stackReducer,
+  queue: queueReducer,
 });
 
 export {
@@ -46,6 +51,14 @@ export {
   stopStack,
   nextStackStep,
   resetStack,
+  setStackStart,
+  setStackEnd,
+  startQueue,
+  stopQueue,
+  nextQueueStep,
+  resetQueue,
+  setQueueStart,
+  setQueueEnd,
 };
 
 export default viewReducer;

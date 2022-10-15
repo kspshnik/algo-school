@@ -19,6 +19,14 @@ import {
   stopSorting,
   stopStack,
   stopStringReverse,
+  startQueue,
+  stopQueue,
+  nextQueueStep,
+  resetQueue,
+  setStackStart,
+  setStackEnd,
+  setQueueStart,
+  setQueueEnd,
 } from './view-slice';
 import {
   clearFibonacchiLimit,
@@ -67,10 +75,18 @@ export {
   stopStack,
   nextStackStep,
   resetStack,
+  setStackStart,
+  setStackEnd,
   setItem,
   clearItem,
   setIndex,
   clearIndex,
+  startQueue,
+  stopQueue,
+  nextQueueStep,
+  resetQueue,
+  setQueueStart,
+  setQueueEnd,
 };
 
 export type {

@@ -26,6 +26,8 @@ export type TStructSliceState = {
   viewData : TStructView,
   isFinished : boolean,
   isActive : boolean,
+  start : number,
+  end: number,
 };
 export type TFormsSliceState = {
   string : string,

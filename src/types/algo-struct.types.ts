@@ -58,7 +58,7 @@ export interface QueueInterface {
   readonly isEmpty : boolean;
   readonly head : QueueNodeInterface<unknown> | null;
 
-  enquenue(node : QueueNodeInterface<unknown>) : void;
+  enqueue(node : QueueNodeInterface<unknown>) : void;
 
   dequeue() : QueueNodeInterface<unknown> | null;
 

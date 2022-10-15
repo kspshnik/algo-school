@@ -4,6 +4,8 @@ import getRandomArray from './get-random-array';
 import swapItemsInArray from './swap-items-in-array';
 import makeViewFromArray from './make-view-from-array';
 import swapItems from './swap-items';
+import makeEmptyTuple from './make-empty-tuple';
+import makeQueueInitialView from './make-queue-initial-view';
 
 export {
   getElementState,
@@ -12,4 +14,6 @@ export {
   getRandomArray,
   swapItemsInArray,
   swapItems,
+  makeEmptyTuple,
+  makeQueueInitialView,
 };

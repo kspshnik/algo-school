@@ -3,28 +3,31 @@ import { QueueInterface } from '../../types/algo-struct.types';
 
 class Queue implements QueueInterface {
   constructor() {
+    this._head = null;
     this._tail = null;
+    this._length = 0;
   }
+
+  private _head : QueueNode<unknown> | null;
 
   private _tail : QueueNode<unknown> | null;
 
-  get tail() : QueueNode<unknown> | null {
+  private _length : number;
+
+  public get tail() : QueueNode<unknown> | null {
     return this._tail;
   }
 
-  get isEmpty() : boolean {
+  public get isEmpty() : boolean {
     return !!this._tail;
   }
 
-  get head() : QueueNode<unknown> | null {
-    let current : QueueNode<unknown> | null = this._tail;
-    if (!current) {
-      return null;
-    }
-    while (current.prev) {
-      current = current.prev;
-    }
-    return current;
+  public get head() : QueueNode<unknown> | null {
+    return this._head;
+  }
+
+  public get length() : number {
+    return this._length;
   }
 
   private static ensureNode(node : QueueNode<unknown> | unknown) : QueueNode<unknown> {
@@ -34,19 +37,25 @@ class Queue implements QueueInterface {
     return new QueueNode<typeof node>(node);
   }
 
-  enquenue(node : QueueNode<unknown>) : void {
+  public enqueue(node : QueueNode<unknown>) : void {
     // eslint-disable-next-line no-param-reassign
-    node.prev = this._tail;
+    node.prev = this._tail ? this._tail : null;
     this._tail = node;
+    if (!this._head) {
+      this._head = node;
+    }
+    this._length += 1;
   }
 
-  dequeue() : QueueNode<unknown> | null {
+  public dequeue() : QueueNode<unknown> | null {
     if (!this._tail) {
       return null;
     }
     if (!this._tail.prev) {
       const res = this._tail;
       this._tail = null;
+      this._head = null;
+      this._length = 0;
       return res;
     }
 
@@ -57,11 +66,15 @@ class Queue implements QueueInterface {
       next = next.prev;
     }
     current.prev = null;
+    this._head = current;
+    this._length -= 1;
     return next;
   }
 
-  purge() : void {
+  public purge() : void {
+    this._head = null;
     this._tail = null;
+    this._length = 0;
   }
 }
 
