@@ -27,16 +27,7 @@ class Queue implements QueueInterface {
   }
 
   public get length() : number {
-    let current : QueueNode<unknown> | null = this._tail;
-    let count = 0;
-    if (!current) {
-      return count;
-    }
-    while (!!current && current !== this._head) {
-      count += 1;
-      current = current.prev ? current.prev : null;
-    }
-    return count;
+    return this._length;
   }
 
   private static ensureNode(node : QueueNode<unknown> | unknown) : QueueNode<unknown> {
@@ -46,7 +37,7 @@ class Queue implements QueueInterface {
     return new QueueNode<typeof node>(node);
   }
 
-  public enquenue(node : QueueNode<unknown>) : void {
+  public enqueue(node : QueueNode<unknown>) : void {
     // eslint-disable-next-line no-param-reassign
     node.prev = this._tail ? this._tail : null;
     this._tail = node;
