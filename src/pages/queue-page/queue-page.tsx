@@ -18,13 +18,15 @@ type TQueueAction = 'ENQUEUE' | 'DEQUEUE' | 'PURGE';
 
 const QueuePage : React.FC = () => {
   const { item } = useSelector((state) => state.forms);
-  const { viewData, isActive, isFinished } = useSelector((state) => state.view.queue);
+  const {
+    viewData, isActive, isFinished, start, end,
+  } = useSelector((state) => state.view.queue);
   const dispatch = useDispatch();
   const [queueAction, setQueueAction] = React.useState<TQueueAction | null>(null);
 
   const queue : React.MutableRefObject<Queue | null> = React.useRef(null);
 
-  const handleEnquene : React.MouseEventHandler<HTMLButtonElement> = () => {
+  const handleEnqueue : React.MouseEventHandler<HTMLButtonElement> = () => {
     if (!isActive
       && isFinished && queue.current && queue.current.length < 7) {
       dispatch(startQueue());
@@ -103,7 +105,7 @@ const QueuePage : React.FC = () => {
                   && queue.current.length < 7)
                 || item.length === 0
               }
-              onClick={handleEnquene} />
+              onClick={handleEnqueue} />
             <Button
               text='Удалить'
               isLoader={isActive && queueAction === 'DEQUEUE'}
@@ -115,7 +117,7 @@ const QueuePage : React.FC = () => {
                   && queue.current
                   && queue.current.length < 1
                 )
-                || viewData.length === 0
+                || viewData.every(([, body]) => !body.value)
               }
               onClick={handleDequeue} />
           </fieldset>
@@ -128,7 +130,7 @@ const QueuePage : React.FC = () => {
                 && !!queueAction
                 && ['ENQUEUE', 'DEQUEUE'].includes(queueAction)
                 && queue.current.length > 0)
-              || viewData.length === 0
+              || (viewData.every(([, body]) => !body.value) && start === 0 && end === 0)
             }
             onClick={handlePurge} />
         </div>
@@ -153,7 +155,6 @@ const QueuePage : React.FC = () => {
                 index={index}
                 state={getElementState(isChanging, isDone)}
                 tail={tail as string} />
-              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
             ))}
           </div>
         </SolutionLayout>
