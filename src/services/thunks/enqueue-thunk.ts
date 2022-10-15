@@ -47,7 +47,7 @@ const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, 
 
   view[pos] = tuple;
   dispatch(nextQueueStep(view));
-  queue.enquenue(node);
+  queue.enqueue(node);
   dispatch(setQueueEnd(pos));
   setTimeout(() => {
     view = [...getState().view.queue.viewData];
