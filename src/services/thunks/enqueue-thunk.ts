@@ -2,26 +2,21 @@ import { nanoid } from '@reduxjs/toolkit';
 import {
   AppThunk, nextQueueStep, setQueueEnd, stopQueue,
 } from '../store';
-import { TStructView, TStructViewItem } from '../../types/store.types';
+import { TStructViewItem } from '../../types/store.types';
 import { SHORT_DELAY_IN_MS } from '../../constants';
 import QueueNode from '../data-structures/queue-node';
 import Queue from '../data-structures/queue';
 
 const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, getState) => {
-  const { viewData, start, end } = getState().view.queue;
+  const { start, end } = getState().view.queue;
   const node = new QueueNode<string>(newItem);
   if (end === 6) {
     return null;
   }
-  console.log('viewData:');
-  console.dir(viewData);
-  const freshView = [...viewData];
-  console.log('freshView:');
-  console.dir(freshView);
+  let view = [...getState().view.queue.viewData];
   let pos : number;
   let tuple : TStructViewItem;
-  console.log(`freshView[end][1].value = '${freshView[end][1].value}', !!freshView[end][1].value = ${!freshView[end][1].value}`);
-  if (start === end && !freshView[end][1].value) {
+  if (start === end && !view[end][1].value) {
     pos = end;
     tuple = [
       'head',
@@ -35,9 +30,8 @@ const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, 
     ];
   } else {
     pos = end + 1;
-    const [head, base] = freshView[end];
-    freshView[end] = [head, base, null];
-    // [head, base] = freshView[pos];
+    const [head, base] = view[end];
+    view[end] = [head, base, null];
 
     tuple = [
       null,
@@ -51,18 +45,13 @@ const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, 
     ];
   }
 
-  freshView[pos] = tuple;
-  dispatch(nextQueueStep(freshView));
+  view[pos] = tuple;
+  dispatch(nextQueueStep(view));
   queue.enquenue(node);
   dispatch(setQueueEnd(pos));
-  let newView : TStructView;
   setTimeout(() => {
-    newView = [...freshView];
-    console.log('newView in callback');
-    console.dir(newView);
-    console.log(`pos = ${pos}\nnewView[pos]:`);
-    console.dir(newView[pos]);
-    const [top, { id, value }, bottom] = freshView[pos];
+    view = [...getState().view.queue.viewData];
+    const [top, { id, value }, bottom] = view[pos];
     tuple = [top,
       {
         id,
@@ -72,8 +61,8 @@ const enqueueThunk : AppThunk = (queue : Queue, newItem : string) => (dispatch, 
       },
       bottom,
     ];
-    newView[pos] = tuple;
-    dispatch(nextQueueStep(newView));
+    view[pos] = tuple;
+    dispatch(nextQueueStep(view));
     dispatch(stopQueue());
   }, SHORT_DELAY_IN_MS);
   return null;
