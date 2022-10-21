@@ -18,12 +18,24 @@ import sortingReducer, {
 } from './sorting-subslice';
 
 import stackReducer, {
-  nextStackStep, resetStack, startStack, stopStack, setStackStart, setStackEnd,
+  nextStackStep,
+  resetStack,
+  setStackEnd,
+  setStackStart,
+  startStack,
+  stopStack,
 } from './stack-subslice';
 
 import queueReducer, {
-  startQueue, stopQueue, nextQueueStep, resetQueue, setQueueStart, setQueueEnd,
+  nextQueueStep,
+  resetQueue,
+  setQueueEnd,
+  setQueueStart,
+  startQueue,
+  stopQueue,
 } from './queue-subslice';
+
+import listReducer, { nextListStep, startList, stopList } from './list-subslice';
 
 const viewReducer = combineReducers({
   string: stringReverseReducer,
@@ -31,6 +43,7 @@ const viewReducer = combineReducers({
   sort: sortingReducer,
   stack: stackReducer,
   queue: queueReducer,
+  list: listReducer,
 });
 
 export {
@@ -59,6 +72,9 @@ export {
   resetQueue,
   setQueueStart,
   setQueueEnd,
+  startList,
+  stopList,
+  nextListStep,
 };
 
 export default viewReducer;

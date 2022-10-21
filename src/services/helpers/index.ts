@@ -6,6 +6,7 @@ import makeViewFromArray from './make-view-from-array';
 import swapItems from './swap-items';
 import makeEmptyTuple from './make-empty-tuple';
 import makeQueueInitialView from './make-queue-initial-view';
+import makeListInitialView from './make-list-initial-view';
 
 export {
   getElementState,
@@ -16,4 +17,5 @@ export {
   swapItems,
   makeEmptyTuple,
   makeQueueInitialView,
+  makeListInitialView,
 };
