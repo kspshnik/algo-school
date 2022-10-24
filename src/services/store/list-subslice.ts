@@ -17,6 +17,9 @@ const listSubslice = createSlice({
     nextListStep: (state, action : PayloadAction<TStructView>) => (
       { ...state, viewData: action.payload }
     ),
+    resetList: (state) => (
+      { ...initialState }
+    ),
   },
 });
 
@@ -26,6 +29,7 @@ export const {
   startList,
   stopList,
   nextListStep,
+  resetList,
 } = listSubslice.actions;
 
 export default listReducer;

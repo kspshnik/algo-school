@@ -9,13 +9,25 @@
 }
 
 .controls {
-  max-width: 925px;
+  max-width: 952px;
   width: 100%;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: start;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 60px;
+  gap: 12px;
   margin: 0 auto;
+}
+
+.controls__set {
+  border: none;
+}
+
+.controls__item {
+  grid-template-columns: 204px repeat(4, 175px);
+}
+
+.controls__index {
+  grid-template-columns: 204px repeat(2, 362px);
 }
 
 .submits {

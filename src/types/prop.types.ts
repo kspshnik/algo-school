@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSXElementConstructor, ReactElement } from 'react';
 import { ElementStates } from './element-states';
 import { Direction } from './direction';
 
@@ -60,3 +60,8 @@ export interface RadioInputProps extends React.HTMLProps<HTMLInputElement> {
 export interface LayoutProps {
   children : React.ReactNode | Array<React.ReactNode>,
 }
+
+export type THeadOrTail = string
+| ReactElement<any, string | JSXElementConstructor<any>>
+| null
+| undefined;

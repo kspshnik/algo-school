@@ -35,7 +35,9 @@ import queueReducer, {
   stopQueue,
 } from './queue-subslice';
 
-import listReducer, { nextListStep, startList, stopList } from './list-subslice';
+import listReducer, {
+  nextListStep, resetList, startList, stopList,
+} from './list-subslice';
 
 const viewReducer = combineReducers({
   string: stringReverseReducer,
@@ -75,6 +77,7 @@ export {
   startList,
   stopList,
   nextListStep,
+  resetList,
 };
 
 export default viewReducer;

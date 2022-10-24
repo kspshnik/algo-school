@@ -10,6 +10,7 @@ import {
   nextStackStep,
   nextStringReverseStep,
   resetFibonacchi,
+  resetList,
   resetQueue,
   resetSorting,
   resetStack,
@@ -93,6 +94,7 @@ export {
   startList,
   stopList,
   nextListStep,
+  resetList,
 };
 
 export type {
