@@ -23,8 +23,9 @@ export interface AbstractNodeInterface<T> {
 }
 
 export interface StackNodeInterface<T> extends AbstractNodeInterface<T> {
-  remove() : void;
   on : StackNodeInterface<unknown> | null,
+
+  remove() : void;
 }
 
 export interface StackInterface {
@@ -61,6 +62,30 @@ export interface QueueInterface {
   enqueue(node : QueueNodeInterface<unknown>) : void;
 
   dequeue() : QueueNodeInterface<unknown> | null;
+
+  purge() : void;
+}
+
+export interface ListInterface {
+  readonly tail : ListNodeInterface<unknown> | null;
+  readonly head : ListNodeInterface<unknown> | null;
+  readonly length : number;
+  readonly isEmpty : boolean;
+  readonly isCycled : boolean;
+
+  insertAtHead(node : ListNodeInterface<unknown>) : void;
+
+  deleteAtHead() : ListNodeInterface<unknown>;
+
+  insertAtTail(node : ListNodeInterface<unknown>) : void;
+
+  deleteAtTail() : ListNodeInterface<unknown>;
+
+  insertAtPosition(node : ListNodeInterface<unknown>, position : number) : void;
+
+  deleteAtPosition(position : number) : ListNodeInterface<unknown>;
+
+  getAtPosition(position : number) : ListNodeInterface<unknown> | null;
 
   purge() : void;
 }

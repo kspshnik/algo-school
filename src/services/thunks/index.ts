@@ -7,6 +7,7 @@ import pushToStackThunk from './push-to-stack-thunk';
 import popFromStackThunk from './pop-from-stack-thunk';
 import enqueueThunk from './enqueue-thunk';
 import dequeueThunk from './dequeue-thunk';
+import resetListThunk from './reset-list-thunk';
 
 export {
   stepIntoReverseString,
@@ -18,4 +19,5 @@ export {
   popFromStackThunk,
   enqueueThunk,
   dequeueThunk,
+  resetListThunk,
 };

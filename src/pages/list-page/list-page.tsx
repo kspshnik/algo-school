@@ -12,7 +12,7 @@ import { Circle } from '../../widgets';
 import { useDispatch, useSelector } from '../../services/hooks/store.hooks';
 import List from '../../services/data-structures/list';
 
-import { resetList, setIndex, setItem } from '../../services/store';
+import { setIndex, setItem } from '../../services/store';
 import { AlgorithmsIterator } from '../../types/types';
 
 import styles from './list-page.module.css';
@@ -20,6 +20,7 @@ import { Button, Input } from '../../ui';
 import { getElementState } from '../../services/helpers';
 import { THeadOrTail } from '../../types/prop.types';
 import { TAlgoViewItem } from '../../types/store.types';
+import { resetListThunk } from '../../services/thunks';
 
 type TListAction = 'HEADPLUS' | 'HEADMINUS' | 'TAILPLUS' | 'TAILMINUS' | 'INDEXPLUS' | 'INDEXMINUS';
 
@@ -96,8 +97,8 @@ const ListPage : FC = () => {
   const handleNoAction : MouseEventHandler<HTMLButtonElement> = () => null;
 
   React.useEffect(() => {
-    dispatch(resetList());
     list.current = new List();
+    dispatch(resetListThunk(list.current));
     return () => {
       list.current = null;
     };

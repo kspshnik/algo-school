@@ -7,6 +7,7 @@ import swapItems from './swap-items';
 import makeEmptyTuple from './make-empty-tuple';
 import makeQueueInitialView from './make-queue-initial-view';
 import makeListInitialView from './make-list-initial-view';
+import generateRandomInt from './generate-random-int';
 
 export {
   getElementState,
@@ -18,4 +19,5 @@ export {
   makeEmptyTuple,
   makeQueueInitialView,
   makeListInitialView,
+  generateRandomInt,
 };
