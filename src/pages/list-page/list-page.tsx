@@ -12,7 +12,9 @@ import { Circle } from '../../widgets';
 import { useDispatch, useSelector } from '../../services/hooks/store.hooks';
 import List from '../../services/data-structures/list';
 
-import { setIndex, setItem } from '../../services/store';
+import {
+  clearItem, setIndex, setItem, startList,
+} from '../../services/store';
 import { AlgorithmsIterator } from '../../types/types';
 
 import styles from './list-page.module.css';
@@ -21,6 +23,7 @@ import { getElementState } from '../../services/helpers';
 import { THeadOrTail } from '../../types/prop.types';
 import { TAlgoViewItem } from '../../types/store.types';
 import { resetListThunk } from '../../services/thunks';
+import insertAtHeadThunk from '../../services/thunks/insert-at-head-thunk';
 
 type TListAction = 'HEADPLUS' | 'HEADMINUS' | 'TAILPLUS' | 'TAILMINUS' | 'INDEXPLUS' | 'INDEXMINUS';
 
@@ -57,6 +60,16 @@ const ListPage : FC = () => {
 
     );
   }, []);
+
+  const handleInsertAtHead : React.MouseEventHandler<HTMLButtonElement> = () => {
+    if (!isActive
+      && isFinished && list.current) {
+      dispatch(startList());
+      setListAction('HEADPLUS');
+      dispatch(insertAtHeadThunk(list.current, item));
+      dispatch(clearItem());
+    }
+  };
   /*
     const handleEnqueue : React.MouseEventHandler<HTMLButtonElement> = () => {
       if (!isActive
@@ -134,7 +147,7 @@ const ListPage : FC = () => {
                   && ['HEADMINUS', 'TAILPLUS', 'TAILMINUS', 'INDEXPLUS', 'INDEXMINUS'].includes(listAction))
                 || item.length === 0
               }
-              onClick={handleNoAction}
+              onClick={handleInsertAtHead}
               linkedList='small' />
             <Button
               text='Удалить из head'
