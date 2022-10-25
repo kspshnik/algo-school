@@ -25,22 +25,25 @@ const insertAtHeadThunk : AppThunk = (list : List, newItem : string) => (dispatc
   list.insertAtHead(node);
   setTimeout(() => {
     view = [...getState().view.list.viewData];
-    [, body] = view[0];
+    let [firstItem] = view;
+    [, body] = firstItem;
     view[0] = [null, body, null];
-    insertable.isChanging = false;
-    insertable.isDone = true;
     const tuple = [
       'head',
-      insertable,
+      {
+        ...insertable,
+        isChanging: false,
+        isDone: true,
+      },
       null,
     ];
 
     dispatch(nextListStep([tuple as TStructViewItem, ...view]));
     setTimeout(() => {
       view = [...getState().view.list.viewData];
-      [head, body, tail] = view[0];
-      body.isDone = false;
-      view[0] = [head, body, tail];
+      [firstItem] = view;
+      [head, body, tail] = firstItem;
+      view[0] = [head, { ...body, isDone: false }, tail];
       dispatch(nextListStep(view));
       dispatch(stopList());
     }, SHORT_DELAY_IN_MS);

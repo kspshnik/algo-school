@@ -56,7 +56,8 @@ const ListPage : FC = () => {
         head={null}
         letter={value as string}
         state={getElementState(isChanging, isDone)}
-        tail={null} />
+        tail={null}
+        isSmall />
 
     );
   }, []);
