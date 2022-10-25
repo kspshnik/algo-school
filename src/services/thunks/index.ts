@@ -8,6 +8,8 @@ import popFromStackThunk from './pop-from-stack-thunk';
 import enqueueThunk from './enqueue-thunk';
 import dequeueThunk from './dequeue-thunk';
 import resetListThunk from './reset-list-thunk';
+import insertAtHeadThunk from './insert-at-head-thunk';
+import insertAtTailThunk from './insert-at-tail-thunk';
 
 export {
   stepIntoReverseString,
@@ -20,4 +22,6 @@ export {
   enqueueThunk,
   dequeueThunk,
   resetListThunk,
+  insertAtHeadThunk,
+  insertAtTailThunk,
 };
