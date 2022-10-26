@@ -22,7 +22,9 @@ import { Button, Input } from '../../ui';
 import { getElementState } from '../../services/helpers';
 import { THeadOrTail } from '../../types/prop.types';
 import { TAlgoViewItem } from '../../types/store.types';
-import { insertAtHeadThunk, insertAtTailThunk, resetListThunk } from '../../services/thunks';
+import {
+  deleteAtHeadThunk, insertAtHeadThunk, insertAtTailThunk, resetListThunk,
+} from '../../services/thunks';
 
 type TListAction = 'HEADPLUS' | 'HEADMINUS' | 'TAILPLUS' | 'TAILMINUS' | 'INDEXPLUS' | 'INDEXMINUS';
 
@@ -74,8 +76,17 @@ const ListPage : FC = () => {
     if (!isActive
       && isFinished && list.current) {
       dispatch(startList());
-      setListAction('HEADMINUS');
+      setListAction('TAILPLUS');
       dispatch(insertAtTailThunk(list.current, item));
+      dispatch(clearItem());
+    }
+  };
+  const handleDeleteAtHead : React.MouseEventHandler<HTMLButtonElement> = () => {
+    if (!isActive
+      && isFinished && list.current) {
+      dispatch(startList());
+      setListAction('HEADMINUS');
+      dispatch(deleteAtHeadThunk(list.current, item));
       dispatch(clearItem());
     }
   };
@@ -168,7 +179,7 @@ const ListPage : FC = () => {
                   && ['HEADPLUS', 'TAILPLUS', 'TAILMINUS', 'INDEXPLUS', 'INDEXMINUS'].includes(listAction))
                 || list.current.isEmpty
               }
-              onClick={handleNoAction}
+              onClick={handleDeleteAtHead}
               linkedList='small' />
             <Button
               text='Добавить в tail'

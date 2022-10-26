@@ -10,6 +10,7 @@ import dequeueThunk from './dequeue-thunk';
 import resetListThunk from './reset-list-thunk';
 import insertAtHeadThunk from './insert-at-head-thunk';
 import insertAtTailThunk from './insert-at-tail-thunk';
+import deleteAtHeadThunk from './delete-at-head-thunk';
 
 export {
   stepIntoReverseString,
@@ -24,4 +25,5 @@ export {
   resetListThunk,
   insertAtHeadThunk,
   insertAtTailThunk,
+  deleteAtHeadThunk,
 };
