@@ -3,7 +3,6 @@ import { AppThunk, nextListStep, stopList } from '../store';
 import List from '../data-structures/list';
 import { TAlgoViewItem } from '../../types/store.types';
 import { SHORT_DELAY_IN_MS } from '../../constants';
-import { emptyListItem } from '../../constants/store-initial-states';
 
 const deleteAtTailThunk : AppThunk = (list : List) => (dispatch, getState) => {
   let view = [...getState().view.list.viewData];
@@ -27,7 +26,7 @@ const deleteAtTailThunk : AppThunk = (list : List) => (dispatch, getState) => {
   setTimeout(() => {
     view = [...getState().view.list.viewData.slice(0, last)];
     if (view.length === 0) {
-      dispatch(nextListStep([emptyListItem]));
+      dispatch(nextListStep([]));
       dispatch(stopList());
       return null;
     }

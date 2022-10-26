@@ -4,12 +4,15 @@ import List from '../data-structures/list';
 import ListNode from '../data-structures/list-node';
 import { TAlgoViewItem, TStructViewItem } from '../../types/store.types';
 import { SHORT_DELAY_IN_MS } from '../../constants';
+import { emptyListItem } from '../../constants/store-initial-states';
 
 const insertAtTailThunk : AppThunk = (list : List, newItem : string) => (dispatch, getState) => {
   const node = new ListNode<string>(newItem);
   let view = [...getState().view.list.viewData];
+  if (view.length === 0) {
+    view = [emptyListItem];
+  }
   let last = view.length - 1;
-  let lastItem : TStructViewItem;
   let [head, body, tail] = view[last];
   const insertable : TAlgoViewItem = {
     isDone: false,
@@ -26,11 +29,15 @@ const insertAtTailThunk : AppThunk = (list : List, newItem : string) => (dispatc
   list.insertAtTail(node);
   setTimeout(() => {
     view = [...getState().view.list.viewData];
-    lastItem = view[last];
-    [, body] = lastItem;
-    view[last] = [null, body, null];
+
+    [, body] = view[last];
+    if (last === 0) {
+      view[last] = ['head', body, null];
+    } else {
+      view[last] = [null, body, null];
+    }
     const tuple = [
-      null,
+      list.length === 1 ? 'head' : null,
       {
         ...insertable,
         isChanging: false,
@@ -39,14 +46,18 @@ const insertAtTailThunk : AppThunk = (list : List, newItem : string) => (dispatc
       'tail',
     ];
 
-    dispatch(nextListStep([...view, tuple as TStructViewItem]));
+    dispatch(
+      nextListStep(
+        view.length === 1 && list.length < 2
+          ? [tuple as TStructViewItem]
+          : [...view, tuple as TStructViewItem],
+      ),
+    );
     setTimeout(() => {
       view = [...getState().view.list.viewData];
       last = view.length - 1;
-      lastItem = view[last];
-      [head, body, tail] = lastItem;
+      [head, body, tail] = view[last];
       view[last] = [head, { ...body, isDone: false }, tail];
-      [head, body, tail] = lastItem;
       dispatch(nextListStep(view));
       dispatch(stopList());
     }, SHORT_DELAY_IN_MS);
