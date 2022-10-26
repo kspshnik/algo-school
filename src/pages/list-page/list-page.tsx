@@ -23,7 +23,11 @@ import { getElementState } from '../../services/helpers';
 import { THeadOrTail } from '../../types/prop.types';
 import { TAlgoViewItem } from '../../types/store.types';
 import {
-  deleteAtHeadThunk, insertAtHeadThunk, insertAtTailThunk, resetListThunk,
+  deleteAtHeadThunk,
+  deleteAtTailThunk,
+  insertAtHeadThunk,
+  insertAtTailThunk,
+  resetListThunk,
 } from '../../services/thunks';
 
 type TListAction = 'HEADPLUS' | 'HEADMINUS' | 'TAILPLUS' | 'TAILMINUS' | 'INDEXPLUS' | 'INDEXMINUS';
@@ -90,29 +94,15 @@ const ListPage : FC = () => {
       dispatch(clearItem());
     }
   };
-  /*
-    const handleEnqueue : React.MouseEventHandler<HTMLButtonElement> = () => {
-      if (!isActive
-        && isFinished && queue.current && queue.current.length < 7) {
-        dispatch(startQueue());
-        setQueueAction('ENQUEUE');
-        dispatch(enqueueThunk(queue.current, item));
-        dispatch(clearItem());
-        setQueueAction(null);
-      }
-    };
-
-    const handleDequeue : React.MouseEventHandler<HTMLButtonElement> = () => {
-      if (!isActive
-        && isFinished && queue.current && queue.current.length > 0) {
-        dispatch(startQueue());
-        setQueueAction('DEQUEUE');
-        dispatch(dequeueThunk(queue.current));
-        dispatch(clearItem());
-        setQueueAction(null);
-      }
-    };
- */
+  const handleDeleteAtTail : React.MouseEventHandler<HTMLButtonElement> = () => {
+    if (!isActive
+      && isFinished && list.current) {
+      dispatch(startList());
+      setListAction('TAILMINUS');
+      dispatch(deleteAtTailThunk(list.current, item));
+      dispatch(clearItem());
+    }
+  };
   const handleItemChange : ChangeEventHandler<HTMLInputElement> = (evt) => {
     const { value } = evt.target;
     if (value.length <= 4) {
@@ -203,7 +193,7 @@ const ListPage : FC = () => {
                   && ['HEADPLUS', 'HEADMINUS', 'TAILPLUS', 'INDEXPLUS', 'INDEXMINUS'].includes(listAction))
                 || list.current.isEmpty
               }
-              onClick={handleNoAction}
+              onClick={handleDeleteAtTail}
               linkedList='small' />
           </fieldset>
 

@@ -4,36 +4,40 @@ import List from '../data-structures/list';
 import { TAlgoViewItem } from '../../types/store.types';
 import { SHORT_DELAY_IN_MS } from '../../constants';
 
-const deleteAtHeadThunk : AppThunk = (list : List) => (dispatch, getState) => {
+const deleteAtTailThunk : AppThunk = (list : List) => (dispatch, getState) => {
   let view = [...getState().view.list.viewData];
-  const start = 0;
-  let [[head, body, tail]] = view;
+  let last = view.length - 1;
+  console.log(`In the beginning last = ${last}, view:`);
+  console.dir(view);
+  let [head, body, tail] = view[last];
   const insertable : TAlgoViewItem = {
-    id: nanoid(24),
-    value: body.value,
-    isChanging: true,
     isDone: false,
+    isChanging: true,
+    value: body.value,
+    id: nanoid(24),
   };
-  view[start] = [
+  view[last] = [
     head,
     { ...body, value: '' },
     insertable,
   ];
   dispatch(nextListStep(view));
-  list.deleteAtHead();
+  list.deleteAtTail();
   setTimeout(() => {
-    view = [...getState().view.list.viewData.slice(1)];
+    view = [...getState().view.list.viewData.slice(0, last)];
     if (view.length === 0) {
       dispatch(nextListStep([]));
       dispatch(stopList());
       return null;
     }
-    [[head, body, tail]] = view;
-    view[start] = ['head', body, tail];
+    last -= 1;
+    [head, body, tail] = view[last];
+    view[last] = [head, body, 'tail'];
+    dispatch(nextListStep(view));
     dispatch(nextListStep(view));
     dispatch(stopList());
   }, SHORT_DELAY_IN_MS);
   return null;
 };
 
-export default deleteAtHeadThunk;
+export default deleteAtTailThunk;
