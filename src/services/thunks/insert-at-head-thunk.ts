@@ -9,7 +9,7 @@ const insertAtHeadThunk : AppThunk = (list : List, newItem : string) => (dispatc
   const node = new ListNode<string>(newItem);
 
   let view = [...getState().view.list.viewData];
-  let [head, body, tail] = view[0];
+  let [[head, body, tail]] = view;
   const insertable : TAlgoViewItem = {
     isDone: false,
     isChanging: true,
