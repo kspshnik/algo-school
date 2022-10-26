@@ -22,7 +22,7 @@ import { Button, Input } from '../../ui';
 import { getElementState } from '../../services/helpers';
 import { THeadOrTail } from '../../types/prop.types';
 import { TAlgoViewItem } from '../../types/store.types';
-import { insertAtHeadThunk, resetListThunk } from '../../services/thunks';
+import { insertAtHeadThunk, insertAtTailThunk, resetListThunk } from '../../services/thunks';
 
 type TListAction = 'HEADPLUS' | 'HEADMINUS' | 'TAILPLUS' | 'TAILMINUS' | 'INDEXPLUS' | 'INDEXMINUS';
 
@@ -75,7 +75,7 @@ const ListPage : FC = () => {
       && isFinished && list.current) {
       dispatch(startList());
       setListAction('HEADMINUS');
-      dispatch(insertAtHeadThunk(list.current, item));
+      dispatch(insertAtTailThunk(list.current, item));
       dispatch(clearItem());
     }
   };
