@@ -136,19 +136,19 @@ class List implements ListInterface {
       current = this._head;
       for (let i = 0; i < position; i += 1) {
         if (current) {
-          if (!current.next) {
+          if (!current.prev) {
             throw new RangeError('Position is out of range!');
           }
-          current = current.next;
+          current = current.prev;
         }
       }
       if (current.next) {
         pre = current;
         post = current.next;
-        pre.next = node;
-        post.prev = node;
-        node.next = pre;
-        node.prev = post;
+        pre.prev = node;
+        post.next = node;
+        node.prev = pre;
+        node.next = post;
       } else {
         this.insertAtTail(node);
       }
