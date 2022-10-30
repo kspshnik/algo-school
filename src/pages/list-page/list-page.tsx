@@ -4,6 +4,7 @@ import React, {
   MouseEventHandler,
   MutableRefObject,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -15,7 +16,6 @@ import List from '../../services/data-structures/list';
 import {
   clearItem, setIndex, setItem, startList,
 } from '../../services/store';
-import { AlgorithmsIterator } from '../../types/types';
 
 import styles from './list-page.module.css';
 import { Button, Input } from '../../ui';
@@ -26,21 +26,25 @@ import {
   deleteAtHeadThunk,
   deleteAtTailThunk,
   insertAtHeadThunk,
+  insertAtIndexThunk,
   insertAtTailThunk,
   resetListThunk,
 } from '../../services/thunks';
+import listStepGenerator from '../../services/data-structures/list-step-generator';
+import { ListStepIteratorInterface } from '../../types/algo-struct.types';
+import { SHORT_DELAY_IN_MS } from '../../constants';
 
 type TListAction = 'HEADPLUS' | 'HEADMINUS' | 'TAILPLUS' | 'TAILMINUS' | 'INDEXPLUS' | 'INDEXMINUS';
 
 const ListPage : FC = () => {
   const { item, index } = useSelector((state) => state.forms);
   const {
-    viewData, isActive, isFinished, start, end,
+    viewData, isActive, isFinished,
   } = useSelector((state) => state.view.list);
   const dispatch = useDispatch();
   const [listAction, setListAction] = useState<TListAction | null>(null);
 
-  const algorithmIterator : MutableRefObject<AlgorithmsIterator | null> = useRef(null);
+  const listStepIterator : MutableRefObject<ListStepIteratorInterface | null> = useRef(null);
   const anime : MutableRefObject<number | null> = useRef(null);
 
   const list : MutableRefObject<List | null> = useRef(null);
@@ -103,6 +107,19 @@ const ListPage : FC = () => {
       dispatch(clearItem());
     }
   };
+  const handleNextStep = React.useCallback(() : void => {
+    if (listStepIterator.current) {
+      dispatch(insertAtIndexThunk(list.current, item, index, listStepIterator.current));
+    }
+  }, [dispatch, item, index]);
+  const handleInsertAtIndex : React.MouseEventHandler<HTMLButtonElement> = () => {
+    if (!isActive
+      && isFinished && list.current) {
+      setListAction('INDEXPLUS');
+      listStepIterator.current = listStepGenerator(index);
+      dispatch(startList());
+    }
+  };
   const handleItemChange : ChangeEventHandler<HTMLInputElement> = (evt) => {
     const { value } = evt.target;
     if (value.length <= 4) {
@@ -119,6 +136,23 @@ const ListPage : FC = () => {
 
   const handleNoAction : MouseEventHandler<HTMLButtonElement> = () => null;
 
+  useEffect(() => {
+    if (isFinished) {
+      listStepIterator.current = null;
+    }
+  }, [isFinished, listStepIterator]);
+  useEffect(() => {
+    if (isActive) {
+      anime.current = setInterval(handleNextStep, SHORT_DELAY_IN_MS) as unknown as number;
+    } else {
+      clearInterval(anime.current as number);
+      anime.current = null;
+    }
+    return () => {
+      clearInterval(anime.current as number);
+      anime.current = null;
+    };
+  }, [isActive, handleNextStep]);
   React.useEffect(() => {
     list.current = new List();
     dispatch(resetListThunk(list.current));
@@ -212,12 +246,13 @@ const ListPage : FC = () => {
                 && listAction === 'INDEXPLUS'}
               disabled={
                 !list.current
+                || !index
                 || (isActive
                   && !!listAction
                   && ['HEADMINUS', 'TAILPLUS', 'TAILMINUS', 'HEADPLUS', 'INDEXMINUS'].includes(listAction))
                 || index === 0
               }
-              onClick={handleNoAction}
+              onClick={handleInsertAtIndex}
               linkedList='big' />
             <Button
               text='Удалить по индексу'

@@ -12,6 +12,7 @@ import insertAtHeadThunk from './insert-at-head-thunk';
 import insertAtTailThunk from './insert-at-tail-thunk';
 import deleteAtHeadThunk from './delete-at-head-thunk';
 import deleteAtTailThunk from './delete-at-tail-thunk';
+import insertAtIndexThunk from './insert-at-index-thunk';
 
 export {
   stepIntoReverseString,
@@ -28,4 +29,5 @@ export {
   insertAtTailThunk,
   deleteAtHeadThunk,
   deleteAtTailThunk,
+  insertAtIndexThunk,
 };

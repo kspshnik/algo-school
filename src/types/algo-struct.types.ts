@@ -11,6 +11,7 @@ export type TStringStepResult = {
 export type StringAlgorithmIteratorInterface = Generator<TStringStepResult, void, never>;
 export type FibonacchiAlgorithmIteratorInterface = Generator<Array<number>, void, never>;
 export type SortingAlgorithmIteratorInterface = Generator<TSortStepResult, void, never>;
+export type ListStepIteratorInterface = Generator<number, void, never>;
 
 export type TSortStepResult = {
   active : Array<number>,
