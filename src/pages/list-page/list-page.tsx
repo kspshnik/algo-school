@@ -1,20 +1,14 @@
 import React, {
-  ChangeEventHandler,
-  FC,
-  MouseEventHandler,
-  MutableRefObject,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
+  ChangeEventHandler, FC, MutableRefObject, useCallback, useEffect, useRef, useState,
 } from 'react';
+import { batch } from 'react-redux';
 import { ControlsLayout, PageLayout, SolutionLayout } from '../../layouts';
 import { Circle } from '../../widgets';
 import { useDispatch, useSelector } from '../../services/hooks/store.hooks';
 import List from '../../services/data-structures/list';
 
 import {
-  clearItem, setIndex, setItem, startList,
+  clearIndex, clearItem, setIndex, setItem, startList,
 } from '../../services/store';
 
 import styles from './list-page.module.css';
@@ -24,6 +18,7 @@ import { THeadOrTail } from '../../types/prop.types';
 import { TAlgoViewItem } from '../../types/store.types';
 import {
   deleteAtHeadThunk,
+  deleteAtIndexThunk,
   deleteAtTailThunk,
   insertAtHeadThunk,
   insertAtIndexThunk,
@@ -109,13 +104,34 @@ const ListPage : FC = () => {
   };
   const handleNextStep = React.useCallback(() : void => {
     if (listStepIterator.current) {
-      dispatch(insertAtIndexThunk(list.current, item, index, listStepIterator.current));
+      switch (listAction) {
+        case 'INDEXPLUS': {
+          dispatch(insertAtIndexThunk(list.current, item, index, listStepIterator.current));
+          break;
+        }
+        case 'INDEXMINUS': {
+          dispatch(deleteAtIndexThunk(list.current, index, listStepIterator.current));
+          break;
+        }
+        default: {
+          const val = !listAction ? 'null' : `${listAction}`;
+          throw new Error(`List action type is '${val}', should be 'INDEXPLUS' or 'INDEXMINUS'!`);
+        }
+      }
     }
-  }, [dispatch, item, index]);
+  }, [dispatch, item, index, listAction]);
   const handleInsertAtIndex : React.MouseEventHandler<HTMLButtonElement> = () => {
     if (!isActive
       && isFinished && list.current) {
       setListAction('INDEXPLUS');
+      listStepIterator.current = listStepGenerator(index);
+      dispatch(startList());
+    }
+  };
+  const handleDeleteAtIndex : React.MouseEventHandler<HTMLButtonElement> = () => {
+    if (!isActive
+      && isFinished && list.current) {
+      setListAction('INDEXMINUS');
       listStepIterator.current = listStepGenerator(index);
       dispatch(startList());
     }
@@ -129,16 +145,15 @@ const ListPage : FC = () => {
 
   const handleIndexChange : ChangeEventHandler<HTMLInputElement> = (evt) => {
     const value = Number(evt.target.value);
-    if (value && !Number.isNaN(value)) {
+    if (!Number.isNaN(value) && list.current && value < list.current.length) {
       dispatch(setIndex(value));
     }
   };
 
-  const handleNoAction : MouseEventHandler<HTMLButtonElement> = () => null;
-
   useEffect(() => {
     if (isFinished) {
       listStepIterator.current = null;
+      setListAction(null);
     }
   }, [isFinished, listStepIterator]);
   useEffect(() => {
@@ -147,12 +162,18 @@ const ListPage : FC = () => {
     } else {
       clearInterval(anime.current as number);
       anime.current = null;
+      if (listAction) {
+        batch(() => {
+          dispatch(clearIndex());
+          dispatch(clearItem());
+        });
+      }
     }
     return () => {
       clearInterval(anime.current as number);
       anime.current = null;
     };
-  }, [isActive, handleNextStep]);
+  }, [isActive, handleNextStep, dispatch, listAction]);
   React.useEffect(() => {
     list.current = new List();
     dispatch(resetListThunk(list.current));
@@ -263,8 +284,9 @@ const ListPage : FC = () => {
                   && !!listAction
                   && ['HEADPLUS', 'TAILPLUS', 'TAILMINUS', 'INDEXPLUS', 'HEADMINUS'].includes(listAction))
                 || list.current.isEmpty
+                //           || list.current.length >= index
               }
-              onClick={handleNoAction}
+              onClick={handleDeleteAtIndex}
               linkedList='big' />
           </fieldset>
         </div>
