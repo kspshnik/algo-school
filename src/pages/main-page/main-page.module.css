@@ -1,5 +1,5 @@
 .content {
-  background-image: url('../../images/bg.jpg');
+  background-image: url('../../assets/images/bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vh;
@@ -53,51 +53,51 @@
 }
 
 .string {
-  background-image: url('../../images/string.svg');
+  background-image: url('../../assets/images/string.svg');
 }
 
 .string:hover {
-  background-image: url('../../images/string-hover.svg');
+  background-image: url('../../assets/images/string-hover.svg');
 }
 
 .fibonacci {
-  background-image: url('../../images/fibonacci.svg');
+  background-image: url('../../assets/images/fibonacci.svg');
 }
 
 .fibonacci:hover {
-  background-image: url('../../images/fibonacci-hover.svg');
+  background-image: url('../../assets/images/fibonacci-hover.svg');
 }
 
 .arr {
-  background-image: url('../../images/arr.svg');
+  background-image: url('../../assets/images/arr.svg');
 }
 
 .arr:hover {
-  background-image: url('../../images/arr-hover.svg');
+  background-image: url('../../assets/images/arr-hover.svg');
 }
 
 .stack {
-  background-image: url('../../images/stack.svg');
+  background-image: url('../../assets/images/stack.svg');
 }
 
 .stack:hover {
-  background-image: url('../../images/stack-hover.svg');
+  background-image: url('../../assets/images/stack-hover.svg');
 }
 
 .queue {
-  background-image: url('../../images/queue.svg');
+  background-image: url('../../assets/images/queue.svg');
 }
 
 .queue:hover {
-  background-image: url('../../images/queue-hover.svg');
+  background-image: url('../../assets/images/queue-hover.svg');
 }
 
 .list {
-  background-image: url('../../images/list.svg');
+  background-image: url('../../assets/images/list.svg');
 }
 
 .list:hover {
-  background-image: url('../../images/list-hover.svg');
+  background-image: url('../../assets/images/list-hover.svg');
 }
 
 .ticker {

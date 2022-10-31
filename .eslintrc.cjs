@@ -38,7 +38,7 @@ module.exports = {
   rules: {
     'no-underscore-dangle': ['error', {
       allow: ['_id', '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'],
-      enforceInMethodNames: true,
+      enforceInMethodNames: false,
       allowAfterThis: true
     }],
     'jsx-quotes': ['error', 'prefer-single'],

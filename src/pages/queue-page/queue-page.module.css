@@ -1,0 +1,29 @@
+.dashboard {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 16px;
+  max-width: 1050px;
+  align-self: center;
+}
+
+.controls {
+  max-width: 925px;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 auto;
+}
+
+.submits {
+  width: 405px;
+  outline: none;
+  border: none;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}

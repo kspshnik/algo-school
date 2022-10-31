@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: border 250ms cubic-bezier(.93, -0.09, .83, .54);
 }
 
 .small {

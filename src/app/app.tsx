@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { FibonacciPage } from '../pages/fibonacci-page/fibonacci-page';
-import { ListPage } from '../pages/list-page/list-page';
-import { MainPage } from '../pages/main-page/main-page';
-import { QueuePage } from '../pages/queue-page/queue-page';
-import { StringComponent } from '../pages/string/string';
-import { SortingPage } from '../pages/sorting-page/sorting-page';
-import { StackPage } from '../pages/stack-page/stack-page';
+import {
+  MainPage,
+  StringReversePage,
+  FibonacciPage,
+  SortingPage,
+  StackPage,
+  QueuePage,
+  ListPage,
+} from '../pages';
 
 import './app.css';
 
@@ -18,7 +20,7 @@ const App = () => (
           <MainPage />
         </Route>
         <Route path='/recursion'>
-          <StringComponent />
+          <StringReversePage />
         </Route>
         <Route path='/fibonacci'>
           <FibonacciPage />

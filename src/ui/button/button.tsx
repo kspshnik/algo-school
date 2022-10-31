@@ -1,20 +1,13 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+
 import React from 'react';
 import styles from './button.module.css';
-import loaderIcon from '../../images/icons/loader.svg';
-import { AscendingIcon } from '../icons/ascending-icon';
-import { DescendingIcon } from '../icons/descending-icon';
+import loaderIcon from '../../assets/images/icons/loader.svg';
+import { AscendingIcon, DescendingIcon } from '../icons';
 import { Direction } from '../../types/direction';
+import { ButtonProps } from '../../types/prop.types';
 
-interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
-  text?: string;
-  type?: 'button' | 'submit' | 'reset';
-  sorting?: Direction;
-  linkedList?: 'small' | 'big';
-  isLoader?: boolean;
-  extraClass?: string;
-}
-
-export const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
   text,
   extraClass = '',
   type = 'button',
@@ -27,6 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
   const currentIcon = sorting === Direction.Ascending ? <AscendingIcon /> : <DescendingIcon />;
   const className = `text text_type_button text_color_primary ${
     styles.button
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
   } ${linkedList && styles[linkedList]} ${
     isLoader && styles.loader
   } ${extraClass}`;
@@ -34,8 +28,10 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={className}
+      /*  eslint-disable-next-line react/button-has-type */
       type={type}
       disabled={isLoader || disabled}
+      /* eslint-disable-next-line react/jsx-props-no-spreading */
       {...rest}>
       {isLoader ? (
         <img className={styles.loader_icon} src={loaderIcon} alt='Загрузка.' />
@@ -48,3 +44,5 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
+
+export default Button;

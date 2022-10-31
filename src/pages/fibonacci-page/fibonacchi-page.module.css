@@ -1,0 +1,21 @@
+
+.dashboard {
+  display: grid;
+  row-gap: 48px;
+  column-gap: 16px;
+  grid-template-columns: repeat(10, 80px);
+  grid-template-rows: repeat(2, 110px);
+  max-width: 1050px;
+  max-height: 270px;
+  margin-top: 48px;
+}
+
+.controls {
+  max-width: 567px;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 auto;
+}

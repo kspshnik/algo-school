@@ -79,11 +79,9 @@ Object {
           </div>
           <div
             class="ticker marquee-container"
-            style="--pause-on-hover: running; --pause-on-click: running;"
           >
             <div
               class="marquee"
-              style="--play: running; --direction: normal; --duration: 0s; --delay: 0s; --iteration-count: infinite;"
             >
               <p
                 class="text text_type_ticker text_color_secondary ticker_text"
@@ -99,8 +97,8 @@ Object {
               </div>
             </div>
             <div
+              aria-hidden="true"
               class="marquee"
-              style="--play: running; --direction: normal; --duration: 0s; --delay: 0s; --iteration-count: infinite;"
             >
               <p
                 class="text text_type_ticker text_color_secondary ticker_text"
@@ -200,11 +198,9 @@ Object {
         </div>
         <div
           class="ticker marquee-container"
-          style="--pause-on-hover: running; --pause-on-click: running;"
         >
           <div
             class="marquee"
-            style="--play: running; --direction: normal; --duration: 0s; --delay: 0s; --iteration-count: infinite;"
           >
             <p
               class="text text_type_ticker text_color_secondary ticker_text"
@@ -220,8 +216,8 @@ Object {
             </div>
           </div>
           <div
+            aria-hidden="true"
             class="marquee"
-            style="--play: running; --direction: normal; --duration: 0s; --delay: 0s; --iteration-count: infinite;"
           >
             <p
               class="text text_type_ticker text_color_secondary ticker_text"
