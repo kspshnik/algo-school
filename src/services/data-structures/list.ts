@@ -116,10 +116,10 @@ class List implements ListInterface {
     current = this._head;
     for (let i = 0; i < position; i += 1) {
       if (current) {
-        if (!current.next) {
+        if (!current.prev) {
           throw new RangeError('Position is out of range!');
         }
-        current = current.next;
+        current = current.prev;
       }
     }
     return current;
@@ -142,9 +142,9 @@ class List implements ListInterface {
           current = current.prev;
         }
       }
-      if (current.next) {
+      if (current.prev) {
         pre = current;
-        post = current.next;
+        post = current.prev;
         pre.prev = node;
         post.next = node;
         node.prev = pre;
@@ -159,8 +159,6 @@ class List implements ListInterface {
 
   public deleteAtPosition(position : number) : ListNode<unknown> {
     let current : ListNode<unknown>;
-    let pre : ListNode<unknown>;
-    let post : ListNode<unknown>;
     if (position > this._length) {
       throw new RangeError('Position is out of range!');
     }
@@ -171,22 +169,20 @@ class List implements ListInterface {
     current = this._head;
     for (let i = 0; i < position; i += 1) {
       if (current) {
-        if (!current.next) {
+        if (!current.prev) {
           throw new RangeError('Position is out of range!');
         }
-        current = current.next;
+        current = current.prev;
       }
     }
     const res : ListNode<unknown> = current;
-    if (current.next) {
-      pre = current;
-      post = current.next;
-      pre.next = post;
-      post.prev = pre;
-    } else {
-      this._head = null;
-      this._tail = null;
+    if (current.prev) {
+      current.prev.next = current.next;
     }
+    if (current.next) {
+      current.next.prev = current.prev;
+    }
+
     this._length -= 1;
     return res;
   }
