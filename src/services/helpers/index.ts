@@ -8,6 +8,7 @@ import makeEmptyTuple from './make-empty-tuple';
 import makeQueueInitialView from './make-queue-initial-view';
 import makeListInitialView from './make-list-initial-view';
 import generateRandomInt from './generate-random-int';
+import getArrowFill from './get-arrow-fill';
 
 export {
   getElementState,
@@ -20,4 +21,5 @@ export {
   makeQueueInitialView,
   makeListInitialView,
   generateRandomInt,
+  getArrowFill,
 };

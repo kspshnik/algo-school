@@ -8,6 +8,14 @@
   align-self: center;
 }
 
+.dashboard__item {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
 .controls {
   max-width: 952px;
   width: 100%;

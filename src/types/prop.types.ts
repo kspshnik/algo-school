@@ -62,6 +62,6 @@ export interface LayoutProps {
 }
 
 export type THeadOrTail = string
-| ReactElement<any, string | JSXElementConstructor<any>>
+| ReactElement<unknown, string | JSXElementConstructor<unknown>>
 | null
 | undefined;

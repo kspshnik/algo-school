@@ -12,8 +12,8 @@ import {
 } from '../../services/store';
 
 import styles from './list-page.module.css';
-import { Button, Input } from '../../ui';
-import { getElementState } from '../../services/helpers';
+import { ArrowIcon, Button, Input } from '../../ui';
+import { getArrowFill, getElementState } from '../../services/helpers';
 import { THeadOrTail } from '../../types/prop.types';
 import { TAlgoViewItem } from '../../types/store.types';
 import {
@@ -302,15 +302,30 @@ const ListPage : FC = () => {
               id,
             },
             tail,
-          ], ind) => (
-            <Circle
-              key={id}
-              head={prepareHeadOrTail(head)}
-              letter={value as string}
-              index={ind}
-              state={getElementState(isChanging, isDone)}
-              tail={prepareHeadOrTail(tail)} />
-          ))}
+          ], ind, view) => {
+            const following = view[ind + 1];
+            let isRightDone = false;
+            let isRightChanging = false;
+            if (following) {
+              isRightDone = following[1].isDone;
+              isRightChanging = following[1].isChanging;
+            }
+
+            return (
+              <div className={styles.dashboard__item} key={id}>
+                <Circle
+                  key={id}
+                  head={prepareHeadOrTail(head)}
+                  letter={value as string}
+                  index={ind}
+                  state={getElementState(isChanging, isDone)}
+                  tail={prepareHeadOrTail(tail)} />
+                {ind === view.length - 1
+                  ? null
+                  : <ArrowIcon fill={getArrowFill(isChanging, isRightChanging, isRightDone)} />}
+              </div>
+            );
+          })}
         </div>
       </SolutionLayout>
     </PageLayout>
