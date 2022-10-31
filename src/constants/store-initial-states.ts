@@ -1,4 +1,5 @@
-import { TAlgoSliceState, TStructSliceState } from '../types/store.types';
+import { nanoid } from '@reduxjs/toolkit';
+import { TAlgoSliceState, TStructSliceState, TStructViewItem } from '../types/store.types';
 import { makeQueueInitialView } from '../services/helpers';
 
 export const algoInitialState : TAlgoSliceState = {
@@ -22,3 +23,22 @@ export const queueInitialState : TStructSliceState = {
   start: 0,
   end: 0,
 };
+
+export const listInitialState : TStructSliceState = {
+  isFinished: true,
+  viewData: [],
+  isActive: false,
+  start: 0,
+  end: 0,
+};
+
+export const emptyListItem : TStructViewItem = [
+  null,
+  {
+    id: nanoid(24),
+    value: '',
+    isChanging: false,
+    isDone: false,
+  },
+  null,
+];

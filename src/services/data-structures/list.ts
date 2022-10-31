@@ -1,7 +1,8 @@
 /* eslint-disable no-param-reassign */
 import ListNode from './list-node';
+import { ListInterface } from '../../types/algo-struct.types';
 
-class List {
+class List implements ListInterface {
   constructor() {
     this._tail = null;
     this._head = null;
@@ -51,7 +52,7 @@ class List {
     return new ListNode<typeof node>(node);
   }
 
-  public prepend(node : ListNode<unknown>) : void {
+  public insertAtHead(node : ListNode<unknown>) : void {
     if (this._head) {
       // eslint-disable-next-line no-param-reassign
       node.prev = this._head;
@@ -60,10 +61,26 @@ class List {
       this._tail = node;
     }
     this._head = node;
-    this._setLength();
+    this._length += 1;
   }
 
-  public append(node : ListNode<unknown>) : void {
+  public deleteAtHead() : ListNode<unknown> {
+    if (!this._head || this._length === 0) {
+      throw new RangeError('Deletion index is out of range: list is empty');
+    }
+    const res : ListNode<unknown> = this._head;
+    if (this._head.prev) {
+      this._head.prev.next = null;
+      this._head = this._head.prev;
+    } else {
+      this._head = null;
+      this._tail = null;
+    }
+    this._length -= 1;
+    return res;
+  }
+
+  public insertAtTail(node : ListNode<unknown>) : void {
     if (this._tail) {
       // eslint-disable-next-line no-param-reassign
       node.next = this._tail;
@@ -72,55 +89,108 @@ class List {
       this._head = node;
     }
     this._tail = node;
-    this._setLength();
+    this._length += 1;
+  }
+
+  public deleteAtTail() : ListNode<unknown> {
+    if (!this._tail || this._length === 0) {
+      throw new RangeError('Deletion index is out of range: list is empty');
+    }
+    const res : ListNode<unknown> = this._tail;
+    if (this._tail.next) {
+      this._tail.next.prev = null;
+      this._tail = this._tail.next;
+    } else {
+      this._head = null;
+      this._tail = null;
+    }
+    this._length -= 1;
+    return res;
+  }
+
+  public getAtPosition(position : number) : ListNode<unknown> | null {
+    let current : ListNode<unknown>;
+    if (!this._head || !this._tail || this._length === 0) {
+      return null;
+    }
+    current = this._head;
+    for (let i = 0; i < position; i += 1) {
+      if (current) {
+        if (!current.prev) {
+          throw new RangeError('Position is out of range!');
+        }
+        current = current.prev;
+      }
+    }
+    return current;
   }
 
   public insertAtPosition(node : ListNode<unknown>, position : number) {
     let current : ListNode<unknown>;
     let pre : ListNode<unknown>;
     let post : ListNode<unknown>;
+    if (!this._head || !this._tail || this._length === 0) {
+      throw new RangeError('Deletion index is out of range: list is empty');
+    }
     if (this._head) {
       current = this._head;
       for (let i = 0; i < position; i += 1) {
         if (current) {
-          if (!current.next) {
+          if (!current.prev) {
             throw new RangeError('Position is out of range!');
           }
-          current = current.next;
+          current = current.prev;
         }
       }
-      if (current.next) {
+      if (current.prev) {
         pre = current;
-        post = current.next;
-        pre.next = node;
-        post.prev = node;
-        node.next = pre;
-        node.prev = post;
+        post = current.prev;
+        pre.prev = node;
+        post.next = node;
+        node.prev = pre;
+        node.next = post;
       } else {
-        this.append(node);
+        this.insertAtTail(node);
       }
     } else {
-      this.prepend(node);
+      this.insertAtHead(node);
     }
+  }
+
+  public deleteAtPosition(position : number) : ListNode<unknown> {
+    let current : ListNode<unknown>;
+    if (position > this._length) {
+      throw new RangeError('Position is out of range!');
+    }
+    if (!this._head || !this._tail || this._length === 0) {
+      throw new RangeError('Deletion index is out of range: list is empty');
+    }
+
+    current = this._head;
+    for (let i = 0; i < position; i += 1) {
+      if (current) {
+        if (!current.prev) {
+          throw new RangeError('Position is out of range!');
+        }
+        current = current.prev;
+      }
+    }
+    const res : ListNode<unknown> = current;
+    if (current.prev) {
+      current.prev.next = current.next;
+    }
+    if (current.next) {
+      current.next.prev = current.prev;
+    }
+
+    this._length -= 1;
+    return res;
   }
 
   public purge() {
     this._head = null;
     this._tail = null;
     this._length = 0;
-  }
-
-  private _setLength() {
-    let count = 0;
-    let current = this._head;
-    const nodesArray : Array<unknown> = [];
-    nodesArray.push(current);
-    while (current && !nodesArray.includes(current)) {
-      count += 1;
-      current = current.prev;
-      nodesArray.push(current);
-    }
-    this._length = count;
   }
 }
 
