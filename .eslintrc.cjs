@@ -7,7 +7,7 @@ module.exports = {
     mongo: false,
     es6: true
   },
-  plugins: ['prefer-arrow', 'ternary', 'promise', 'import', 'jsx-a11y', "@typescript-eslint"],
+  plugins: ['prefer-arrow', 'ternary', 'promise', 'import', 'jsx-a11y', "@typescript-eslint", "cypress"],
   extends: [
     'plugin:react-hooks/recommended',
     'plugin:ternary/recommended',
@@ -23,6 +23,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    "plugin:cypress/recommended",
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
