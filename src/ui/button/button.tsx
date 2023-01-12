@@ -31,10 +31,11 @@ const Button: React.FC<ButtonProps> = ({
       /*  eslint-disable-next-line react/button-has-type */
       type={type}
       disabled={isLoader || disabled}
+      data-testid='ui-regular-button'
       /* eslint-disable-next-line react/jsx-props-no-spreading */
       {...rest}>
       {isLoader ? (
-        <img className={styles.loader_icon} src={loaderIcon} alt='Загрузка.' />
+        <img data-testid='ui-button-loader-img' className={styles.loader_icon} src={loaderIcon} alt='Загрузка.' />
       ) : (
         <>
           {sorting && currentIcon}
