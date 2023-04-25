@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TFormsSliceState } from '../../types/store.types';
 import { TSortingChoiceType } from '../../types/types';
 import { NONE } from '../../constants';
-import { Direction } from '../../types/direction';
+import Direction from '../../types/direction';
 
 const initialState : TFormsSliceState = {
   string: '',

@@ -2,7 +2,7 @@ import {
   ASC, BUBBLE_SORT, DSC, INSERTION_SORT, NONE,
 } from '../constants/type-literals';
 import { TSortStepResult, TStringStepResult } from './algo-struct.types';
-import { Direction } from './direction';
+import Direction from './direction';
 
 export type TSortingChoiceType = typeof BUBBLE_SORT | typeof INSERTION_SORT | typeof NONE;
 

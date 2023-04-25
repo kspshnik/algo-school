@@ -1,5 +1,5 @@
 import { TSortingChoiceType } from './types';
-import { Direction } from './direction';
+import Direction from './direction';
 
 export type TAlgoViewItem = {
   id : string,

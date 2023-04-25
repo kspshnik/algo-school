@@ -9,7 +9,7 @@ import { setSortingDirection, setSortingType, startSorting } from '../../service
 import {
   ASC, BUBBLE_SORT, DELAY_IN_MS, DSC, INSERTION_SORT, NONE,
 } from '../../constants';
-import { Direction } from '../../types/direction';
+import Direction from '../../types/direction';
 import { getElementState } from '../../services/helpers';
 
 import styles from './sorting-page.module.css';
