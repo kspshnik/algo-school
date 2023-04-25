@@ -1,0 +1,209 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Circle widget should match snapshot in all renders changing state should match snapshot 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 absolute head element"
+  />
+  <div
+    className="circle   changing"
+    data-testid="widget-circle-ква"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    >
+      ква
+    </p>
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+  />
+</div>
+`;
+
+exports[`Circle widget should match snapshot in all renders circle enriched by head & tail both with text should match snapshot 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 absolute head string"
+  >
+    шапка
+  </div>
+  <div
+    className="circle   default"
+    data-testid="widget-circle-фыр"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    >
+      фыр
+    </p>
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 absolute tail30 string"
+  >
+    хвост
+  </div>
+</div>
+`;
+
+exports[`Circle widget should match snapshot in all renders circle w/small Circle in head should match snapshot 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 absolute head element"
+  >
+    <div
+      className="content "
+    >
+      <div
+        className="text text_type_input text_color_input mb-4 absolute head element"
+      />
+      <div
+        className="circle  small default"
+        data-testid="widget-circle-куку"
+      >
+        <p
+          className="text text_type_circle text_color_input letter"
+        >
+          куку
+        </p>
+      </div>
+      <p
+        className="text text_type_input text_color_input mt-4 absolute index"
+      />
+      <div
+        className="text text_type_input text_color_input mt-4 absolute tail30 element"
+      />
+    </div>
+  </div>
+  <div
+    className="circle   default"
+    data-testid="widget-circle-быр"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    >
+      быр
+    </p>
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+  />
+</div>
+`;
+
+exports[`Circle widget should match snapshot in all renders circle w/small Circle in tail should match snapshot 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 absolute head element"
+  />
+  <div
+    className="circle   default"
+    data-testid="widget-circle-быр"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    >
+      быр
+    </p>
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+  >
+    <div
+      className="content "
+    >
+      <div
+        className="text text_type_input text_color_input mb-4 absolute head element"
+      />
+      <div
+        className="circle  small default"
+        data-testid="widget-circle-куку"
+      >
+        <p
+          className="text text_type_circle text_color_input letter"
+        >
+          куку
+        </p>
+      </div>
+      <p
+        className="text text_type_input text_color_input mt-4 absolute index"
+      />
+      <div
+        className="text text_type_input text_color_input mt-4 absolute tail30 element"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Circle widget should match snapshot in all renders done state should match snapshot 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 absolute head element"
+  />
+  <div
+    className="circle   modified"
+    data-testid="widget-circle-ква"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    >
+      ква
+    </p>
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+  />
+</div>
+`;
+
+exports[`Circle widget should match snapshot in all renders should match snapshot 1`] = `
+<div
+  className="content "
+>
+  <div
+    className="text text_type_input text_color_input mb-4 absolute head element"
+  />
+  <div
+    className="circle   default"
+    data-testid="widget-circle-ква"
+  >
+    <p
+      className="text text_type_circle text_color_input letter"
+    >
+      ква
+    </p>
+  </div>
+  <p
+    className="text text_type_input text_color_input mt-4 absolute index"
+  />
+  <div
+    className="text text_type_input text_color_input mt-4 absolute tail30 element"
+  />
+</div>
+`;

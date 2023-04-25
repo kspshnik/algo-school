@@ -22,6 +22,7 @@ const Circle : React.FC<CircleProps> = ({
       {head}
     </div>
     <div
+      data-testid={`widget-circle-${(!letter ? 'default-no-letter' : letter)}`}
       className={`${styles.circle}  ${isSmall ? styles.small : ''} ${
         styles[state]
       }`}>

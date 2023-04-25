@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it should match snapshot should match disabled button 1`] = `
+<button
+  className="text text_type_button text_color_primary button undefined false "
+  data-testid="ui-regular-button"
+  disabled={true}
+  type="button"
+>
+  <p
+    className="text undefined"
+  >
+    Test text!
+  </p>
+</button>
+`;
+
+exports[`it should match snapshot should match loader 1`] = `
+<button
+  className="text text_type_button text_color_primary button undefined loader "
+  data-testid="ui-regular-button"
+  disabled={true}
+  type="button"
+>
+  <img
+    alt="Загрузка."
+    className="loader_icon"
+    data-testid="ui-button-loader-img"
+    src="loader.svg"
+  />
+</button>
+`;
+
+exports[`it should match snapshot should match normal button w/out text 1`] = `
+<button
+  className="text text_type_button text_color_primary button undefined false "
+  data-testid="ui-regular-button"
+  type="button"
+>
+  <p
+    className="text undefined"
+  />
+</button>
+`;
+
+exports[`it should match snapshot should match normal button w/text 1`] = `
+<button
+  className="text text_type_button text_color_primary button undefined false "
+  data-testid="ui-regular-button"
+  type="button"
+>
+  <p
+    className="text undefined"
+  >
+    Test text!
+  </p>
+</button>
+`;
