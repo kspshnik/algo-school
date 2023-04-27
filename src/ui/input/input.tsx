@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+
 import React from 'react';
 import styles from './input.module.css';
 import { InputProps } from '../../types/prop.types';
