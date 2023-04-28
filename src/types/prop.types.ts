@@ -1,6 +1,6 @@
 import React, { JSXElementConstructor, ReactElement } from 'react';
 import { ElementStates } from './element-states';
-import { Direction } from './direction';
+import Direction from './direction';
 
 export interface PageLayoutProps {
   title : string;

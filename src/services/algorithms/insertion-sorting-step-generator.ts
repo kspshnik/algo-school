@@ -1,6 +1,6 @@
 import { SortingAlgorithmIteratorInterface } from '../../types/algo-struct.types';
 import { swapItemsInArray } from '../helpers';
-import { Direction } from '../../types/direction';
+import Direction from '../../types/direction';
 
 function* insertionSortingStepGenerator(
   arr : Array<number>,

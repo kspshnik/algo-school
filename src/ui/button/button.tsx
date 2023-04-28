@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './button.module.css';
 import loaderIcon from '../../assets/images/icons/loader.svg';
 import { AscendingIcon, DescendingIcon } from '../icons';
-import { Direction } from '../../types/direction';
+import Direction from '../../types/direction';
 import { ButtonProps } from '../../types/prop.types';
 
 const Button: React.FC<ButtonProps> = ({
@@ -31,10 +31,11 @@ const Button: React.FC<ButtonProps> = ({
       /*  eslint-disable-next-line react/button-has-type */
       type={type}
       disabled={isLoader || disabled}
+      data-testid='ui-regular-button'
       /* eslint-disable-next-line react/jsx-props-no-spreading */
       {...rest}>
       {isLoader ? (
-        <img className={styles.loader_icon} src={loaderIcon} alt='Загрузка.' />
+        <img data-testid='ui-button-loader-img' className={styles.loader_icon} src={loaderIcon} alt='Загрузка.' />
       ) : (
         <>
           {sorting && currentIcon}

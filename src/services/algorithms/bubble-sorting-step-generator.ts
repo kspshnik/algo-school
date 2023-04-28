@@ -1,7 +1,7 @@
 import { SortingAlgorithmIteratorInterface } from '../../types/algo-struct.types';
 
 import { swapItemsInArray } from '../helpers';
-import { Direction } from '../../types/direction';
+import Direction from '../../types/direction';
 
 function* bubbleSortingStepGenerator(
   arr : Array<number>,

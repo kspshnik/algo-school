@@ -24,6 +24,8 @@
     "jsx" : "preserve"
   },
   "include" : [
-    "src"
+    "src",
+    "cypress.config.ts",
+    "cypress",
   ]
 }
