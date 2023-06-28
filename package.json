@@ -5,7 +5,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
     "@sentry/react": "^7.9.0",
-    "@sentry/tracing": "^7.9.0",
+    "@sentry/tracing": "^7.54.0",
     "core-js": "^3.24.1",
     "nanoid": "^3.2.0",
     "react": "^17.0.2",
